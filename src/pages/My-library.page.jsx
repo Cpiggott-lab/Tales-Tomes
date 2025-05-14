@@ -1,4 +1,4 @@
-function LibraryPage() {
-  return <h1>Library Page</h1>;
+function MyLibraryPage() {
+  return <h1>My Library Page</h1>;
 }
-export default LibraryPage;
+export default MyLibraryPage;

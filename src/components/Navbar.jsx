@@ -1,3 +1,5 @@
+import "./Navbar.style.css";
+
 import { Link } from "react-router-dom";
 
 function Navbar() {
@@ -5,10 +7,20 @@ function Navbar() {
     <header className="navbar">
       <nav className="nav-links">
         <Link to="/">Home</Link>
-        <Link to="/library">Library</Link>
+        <Link to="/MyLibraryPage">My Books</Link>
         <Link to="/wishlist">Wishlist</Link>
-        <Link to="/cart">Cart</Link>
       </nav>
+      <div>
+        <Link to="/cart">
+          <button>
+            <img
+              src="public/shopping-cart.png"
+              alt="shopping cart image"
+              className="cart-image"
+            />
+          </button>
+        </Link>
+      </div>
     </header>
   );
 }

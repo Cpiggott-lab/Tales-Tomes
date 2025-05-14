@@ -1,8 +1,4 @@
-import { useParams } from "react-router-dom";
-
 function ProductDetailsPage() {
-  const { id } = useParams();
-
-  return <h1>Book ID: {id}</h1>;
+  return <h1>Book ID</h1>;
 }
 export default ProductDetailsPage;

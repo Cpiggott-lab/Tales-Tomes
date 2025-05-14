@@ -5,11 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "craco build",
-    "lint": "eslint .",
+    "build": "vite build",
     "preview": "vite preview",
-    "start": "craco start",
-    "test": "craco test"
+    "lint": "eslint ."
   },
   "dependencies": {
     "react": "^19.1.0",
