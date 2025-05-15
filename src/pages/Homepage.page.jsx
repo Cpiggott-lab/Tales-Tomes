@@ -21,12 +21,12 @@ function HomePage() {
             </button>
           </form>
         </section>
-        <h1 className="homepage-title">Welcome Travelers!</h1>
+        <h1 className="homepage-title">Welcome Travelers of Epic Tomes!</h1>
         <p className="homepage-subtitle">
           Discover new worlds, track your reading journey, and find your next
           favorite book.
         </p>
-        <a href="/LibraryCatalog" className="homepage-button">
+        <a href="/library-catalog" className="homepage-button">
           Browse Library
         </a>
       </div>

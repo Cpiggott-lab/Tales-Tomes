@@ -4,7 +4,8 @@
   align-items: center;
   background: linear-gradient(to bottom, #eef2f3, #ffffff);
   text-align: center;
-  min-height: 100vh;
+  min-height: 88vh;
+  justify-content: center;
 }
 
 .logo-search-section {
@@ -12,7 +13,6 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  padding-bottom: 5rem;
   gap: 1rem;
 }
 

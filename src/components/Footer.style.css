@@ -2,16 +2,15 @@
   background-color: #6366f1;
   color: white;
   text-align: center;
-  padding: 0.5rem 0;
+  padding: 0.3rem;
   font-size: 0.9rem;
   margin-top: auto;
 }
 
-.footer-link {
+.link-name {
   color: #dbeafe;
   text-decoration: none;
   font-size: 1rem;
-  margin-bottom: 0.2rem;
   display: inline-block;
   transition: color 0.3s;
 }
@@ -19,4 +18,22 @@
 .footer-link:hover {
   color: #ffffff;
   text-decoration: underline;
+}
+.link-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+.favicon-logo {
+  height: 40px;
+  width: auto;
+}
+.link-section-container {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  justify-content: center;
+  margin-bottom: 0;
 }

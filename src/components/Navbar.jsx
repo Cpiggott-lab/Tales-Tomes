@@ -1,15 +1,27 @@
 import "./Navbar.style.css";
-
 import { Link } from "react-router-dom";
+
+const navLikns = [
+  { name: "HOME", path: "/" },
+  { name: "MY BOOKS", path: "/my-library" },
+  { name: "WISHLIST", path: "/wishlist" },
+];
 
 function Navbar() {
   return (
     <header className="navbar">
       <nav className="nav-links">
-        <Link to="/">HOME</Link>
-        <Link to="/MyLibraryPage">MY BOOKS</Link>
-        <Link to="/wishlist">WISHLIST</Link>
+        {navLikns.map((link) => (
+          <Link to={link.path} key={link.name}>
+            {link.name}
+          </Link>
+        ))}
       </nav>
+      {/* <nav className="nav-links">
+        <Link to="/">HOME</Link>
+        <Link to="/my-library-page">MY BOOKS</Link>
+        <Link to="/wishlist">WISHLIST</Link>
+      </nav> */}
       <div className="nav-right">
         <div className="nav-links">
           <Link to="#">MY ACCOUNT </Link>
