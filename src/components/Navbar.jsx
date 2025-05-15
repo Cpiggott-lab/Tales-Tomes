@@ -6,11 +6,14 @@ function Navbar() {
   return (
     <header className="navbar">
       <nav className="nav-links">
-        <Link to="/">Home</Link>
-        <Link to="/MyLibraryPage">My Books</Link>
-        <Link to="/wishlist">Wishlist</Link>
+        <Link to="/">HOME</Link>
+        <Link to="/MyLibraryPage">MY BOOKS</Link>
+        <Link to="/wishlist">WISHLIST</Link>
       </nav>
-      <div>
+      <div className="nav-right">
+        <div className="nav-links">
+          <Link to="#">MY ACCOUNT </Link>
+        </div>
         <Link to="/cart">
           <button>
             <img
