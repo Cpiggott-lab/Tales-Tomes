@@ -1,0 +1,51 @@
+.product-page {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(to bottom, #eef2f3, #ffffff);
+}
+.product-page-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  font-weight: bold;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  width: 100%;
+  border-bottom: 1px solid #000000;
+}
+.book-details-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: aquamarine;
+}
+.book-cover-container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  width: 30vw;
+  height: 100vh;
+  margin-top: 4rem;
+}
+.product-book-info-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 70vw;
+  height: 100vh;
+  gap: 1rem;
+  margin-top: 4rem;
+}
+.product-page-buttons-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+}

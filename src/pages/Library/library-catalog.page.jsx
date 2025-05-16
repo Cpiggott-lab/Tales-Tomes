@@ -52,7 +52,7 @@ function LibraryCatalog() {
         removeFromWishlist={removeFromWishlist}
         addToCart={addToCart}
         removeFromCart={removeFromCart}
-        showDetails={false}
+        showDetails={true}
       />
 
       {!searching && loading && <p>Loading...</p>}

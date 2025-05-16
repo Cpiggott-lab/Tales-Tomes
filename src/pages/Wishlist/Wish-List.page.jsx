@@ -70,7 +70,7 @@ function WishlistPage() {
         removeFromWishlist={handleRemoveFromWishlist}
         addToCart={handleAddToCart}
         removeFromCart={() => {}}
-        showDetails={false}
+        showDetails={true}
       />
     </div>
   );

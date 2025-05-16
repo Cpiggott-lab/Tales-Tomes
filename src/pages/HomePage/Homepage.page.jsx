@@ -3,6 +3,7 @@ import Search from "../../components/Search";
 import "./Homepage.style.css";
 import { useBookActions } from "../../hooks/useBookActions";
 import BookList from "../../components/BookList";
+import { Link } from "react-router-dom";
 
 function HomePage() {
   const [books, setBooks] = useState([]);
@@ -30,9 +31,9 @@ function HomePage() {
         Discover new worlds, track your reading journey, and find your next
         favorite book.
       </p>
-      <a href="/library-catalog" className="homepage-button">
+      <Link to="/library-catalog" className="homepage-button">
         Browse Library
-      </a>
+      </Link>
 
       <div className="search-bar-wrapper">
         <Search setBooks={setBooks} />
