@@ -1,0 +1,9 @@
+* {
+  margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+}
+.main-app {
+  position: relative;
+  top: 4vh;
+}
