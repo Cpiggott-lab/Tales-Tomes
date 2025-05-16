@@ -25,26 +25,19 @@ function BookList({
 
         return (
           <div key={`${normalizedKey}-${index}`} className="book-item">
-            {imageUrl && (
-              <img src={imageUrl} alt={book.title} className="book-cover" />
-            )}
-
             <div className="book-info-block">
+              {showDetails && imageUrl && (
+                <Link to={`/product/${normalizedKey}`} state={{ book }}>
+                  <img src={imageUrl} alt={book.title} className="book-cover" />
+                </Link>
+              )}
+
               <div className="book-info">
                 <h2 className="book-title">{truncatedTitle}</h2>
                 <p className="book-author">by {truncatedAuthor}</p>
               </div>
 
               <div className="book-actions">
-                {showDetails && (
-                  <Link
-                    to={`/product/${normalizedKey}`}
-                    className="book-card-button"
-                  >
-                    View Details
-                  </Link>
-                )}
-
                 <BookCardButtons
                   book={{ ...book, key: normalizedKey }}
                   wishlist={wishlist}

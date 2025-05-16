@@ -1,8 +1,23 @@
 // https://tales-tomes-production.up.railway.app/library
+import "./My-library.style.css";
 function MyLibraryPage() {
   return (
     <div className="library-catalog">
-      <h1>My Library Page</h1>
+      <h1 className="my-library-title">My Library</h1>
+      <div className="library-catalog-container">
+        <div className="owned-container">
+          <h1 className="owned-title">Owned</h1>
+          <div className="owned-list">list</div>
+        </div>
+        <div className="reading-container">
+          <h1 className="reading-title">Reading</h1>
+          <div className="reading-list">list</div>
+        </div>
+        <div className="finished-container">
+          <h1 className="finished-title">Finished</h1>
+          <div className="finished-list">list</div>
+        </div>
+      </div>
     </div>
   );
 }

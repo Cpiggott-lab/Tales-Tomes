@@ -1,0 +1,90 @@
+.library-catalog {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(to bottom, #eef2f3, #ffffff);
+}
+.my-library-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  font-weight: bold;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  width: 100%;
+  border-bottom: 1px solid #000000;
+}
+.library-catalog-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+.owned-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: 100%;
+}
+.owned-title {
+  font-size: 1.5rem;
+  border-bottom: 1px solid #000000;
+  margin-bottom: 1rem;
+}
+.owned-list {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: yellow;
+}
+.reading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: 100%;
+}
+.reading-title {
+  font-size: 1.5rem;
+  border-bottom: 1px solid #000000;
+  margin-bottom: 1rem;
+}
+.reading-list {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: green;
+}
+.finished-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: 100%;
+}
+.finished-title {
+  font-size: 1.5rem;
+  border-bottom: 1px solid #000000;
+  margin-bottom: 1rem;
+}
+.finished-list {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: purple;
+}
