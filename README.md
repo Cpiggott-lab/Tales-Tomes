@@ -1,92 +1,137 @@
-# Tales-Tomes📚
+# 📚 Tales & Tomes
 
-Welcome to Tales & Tomes, a React-based web application for managing books, tracking reading progress, and discovering new releases!
+A sleek, interactive book discovery and management platform built with **React** and **Vite**. Browse a live-updating library catalog, search books by keyword, and manage your personal **wishlist**, **cart**, and **reading progress** — all from a single UI.
 
-🚀 Project Overview
-Tales & Tomes is designed to provide a smooth and intuitive experience for book lovers:
+---
 
-📖 Browse upcoming book releases
+## ✨ Features
 
-🛒 Purchase available books
+### 🔍 Homepage Search
 
-📝 Track owned books across "Not Read", "Reading", and "Read" shelves
+- Live search powered by OpenLibrary API
+- Search results display book cover, title, author
+- Click "View Details" to navigate to the product page
+- Add or remove books from:
+  - ✅ Wishlist
+  - 🛒 Cart
 
-❤️ Save favorites to a wishlist
+### 📖 Library Catalog
 
-Built with React and modern web practices for speed and scalability.
+- Infinite scroll: loads more books as you scroll
+- Full integration with cart and wishlist state
+- Matches OpenLibrary book data with your local state
 
-🛠 Tech Stack
-React (Create React App)
+### 📁 My Library Page (coming soon)
 
-JavaScript (ES6+)
+- Drag-and-drop interface to track reading status:
+  - Not Read → Reading → Read
 
-HTML5 & CSS3
+### 🛒 Cart Page
 
-📂 Project Structure
-php
-Copy
-Edit
-tales-tomes/
+- Displays books added to your cart
+- Remove items or proceed to checkout flow
+
+### ❤️ Wishlist Page
+
+- Tracks all books marked as "Wishlist"
+- Reversible action (remove from wishlist)
+
+---
+
+## 🛠 Tech Stack
+
+- **Frontend:** React + Vite
+- **API:** OpenLibrary REST API
+- **State Management:** useState, custom `useBookActions` hook
+- **Backend (mock):** JSON Server (hosted on Railway)
+- **Styling:** Plain CSS modules by page/component
+
+---
+
+## 📂 Project Structure
+
+```
+
+src/
 │
-├── public/
-│ └── index.html
+├── components/
+│   ├── BookCardButtons.jsx
+│   ├── Search.jsx
+│   └── Footer/ & Navbar/
 │
-├── src/
-│ ├── components/ # Reusable components (buttons, cards, etc.)
-│ ├── pages/ # Main page views (Home, Wishlist, Library, etc.)
-│ ├── App.jsx # Main App component
-│ ├── index.js # Entry point
-│ └── index.css # Global styles
+├── hooks/
+│   ├── useBookActions.js
+│   └── useFetch.js
 │
-├── package.json
-└── README.md
-🧩 Features
-🔎 Live updating list of upcoming book releases
+├── pages/
+│   ├── HomePage/
+│   ├── Library/
+│   ├── MyLibrary/
+│   ├── Cart/
+│   ├── Wishlist/
+│   └── About/
+│
+├── services/
+│   └── books.service.js
+│
+├── App.jsx
+└── Main.jsx
 
-🛒 Cart and checkout simulation for available books
+```
 
-📚 Drag-and-drop organization for personal book collection
+---
 
-✏️ Simple and intuitive UI to manage reading statuses
+## 🚀 Getting Started
 
-📜 Lightweight, fast, and mobile-responsive design
+1. **Install dependencies:**
 
-🚀 Getting Started
-Clone the repository:
+   ```bash
+   npm install
+   ```
 
-bash
-Copy
-Edit
-git clone https://github.com/your-username/tales-tomes.git
-cd tales-tomes
-Install dependencies:
+````
 
-bash
-Copy
-Edit
-npm install
-Start the development server:
+2. **Start the development server:**
 
-bash
-Copy
-Edit
-npm start
-The app will open at http://localhost:3000.
+   ```bash
+   npm run dev
+   ```
 
-🎯 Future Enhancements
-✨ Integrate a real bookstore API (e.g., Open Library API + Cover API)
+3. **Run JSON Server mock backend (if modifying backend):**
 
-✨ Add user authentication for personal libraries
+   ```bash
+   npm run backend
+   ```
 
-✨ Wishlist sync and storage
+4. Access the app at: `http://localhost:5173`
 
-✨ Responsive animations and UI polish
+---
 
-📄 License
-This project is licensed under the MIT License.
+## 🌐 Live Demo
 
-🧙 About the Author
-Built with care by Christopher Piggott.
-Feel free to connect on LinkedIn! 🚀
+[🔗 Hosted App on Vercel/Railway (coming soon)](#)
 
-✨ Happy Reading!
+---
+
+## 📖 API Reference
+
+* [OpenLibrary Search API](https://openlibrary.org/dev/docs/api/search)
+* [OpenLibrary Covers API](https://openlibrary.org/dev/docs/api/covers)
+
+---
+
+## 🙌 Acknowledgements
+
+* [OpenLibrary](https://openlibrary.org/)
+* [Railway](https://railway.app/)
+* [Vite](https://vitejs.dev/)
+
+---
+
+## 🧠 Future Enhancements
+
+* User authentication & profiles
+* Book reviews and ratings
+* Save progress across sessions
+* Real checkout functionality with payment integration
+````

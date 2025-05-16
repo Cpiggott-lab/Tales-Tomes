@@ -4,7 +4,6 @@
   align-items: center;
   background: linear-gradient(to bottom, #eef2f3, #ffffff);
   text-align: center;
-  min-height: 88vh;
   justify-content: center;
 }
 
@@ -13,17 +12,15 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
 }
 
 .logo-image {
-  height: 120px;
+  height: 300px;
   width: auto;
 }
 
 .search-form {
   display: flex;
-  gap: 0.5rem;
   justify-content: center;
 }
 
@@ -31,8 +28,9 @@
   padding: 0.75rem 1rem;
   border: 1px solid #d1d5db;
   border-radius: 8px;
-  font-size: 1rem;
+  font-size: 0.8rem;
   width: 250px;
+  margin-bottom: 2rem;
 }
 
 .search-button {
@@ -41,7 +39,7 @@
   color: white;
   border: none;
   border-radius: 8px;
-  font-size: 1rem;
+  font-size: 0.8rem;
   cursor: pointer;
   transition: background-color 0.3s;
 }
@@ -73,10 +71,27 @@
   border-radius: 8px;
   text-decoration: none;
   transition: background-color 0.3s, transform 0.2s;
-  margin-bottom: 3rem;
+  margin-bottom: 1rem;
 }
 
 .homepage-button:hover {
   background-color: #4338ca;
   transform: translateY(-2px);
+}
+.search-results {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+  background-color: #eef2f3;
+  list-style-type: none;
+}
+.book-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem;
 }

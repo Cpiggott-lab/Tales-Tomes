@@ -1,6 +1,10 @@
 .footer {
   background-color: #6366f1;
   color: white;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 1000;
   text-align: center;
   padding: 0.3rem;
   font-size: 0.9rem;
@@ -27,7 +31,7 @@
   gap: 0.5rem;
 }
 .favicon-logo {
-  height: 40px;
+  height: 20px;
   width: auto;
 }
 .link-section-container {
@@ -35,5 +39,5 @@
   flex-direction: row;
   gap: 2rem;
   justify-content: center;
-  margin-bottom: 0;
+  margin-bottom: 0.5rem;
 }

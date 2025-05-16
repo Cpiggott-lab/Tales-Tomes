@@ -36,7 +36,7 @@ function Footer() {
             className="favicon-logo"
           />
           <Link to="/about" className="link-name">
-            About Me
+            About
           </Link>
         </div>
       </section>
