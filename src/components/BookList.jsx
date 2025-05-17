@@ -27,9 +27,19 @@ function BookList({
           <div key={`${normalizedKey}-${index}`} className="book-item">
             <div className="book-info-block">
               {showDetails && imageUrl && (
-                <Link to={`/product/${normalizedKey}`} state={{ book }}>
-                  <img src={imageUrl} alt={book.title} className="book-cover" />
-                </Link>
+                <div className="book-image-container">
+                  <Link
+                    to={`/product/${normalizedKey}`}
+                    state={{ book }}
+                    className="book-image-link-container"
+                  >
+                    <img
+                      src={imageUrl}
+                      alt={book.title}
+                      className="book-cover"
+                    />
+                  </Link>
+                </div>
               )}
 
               <div className="book-info">
