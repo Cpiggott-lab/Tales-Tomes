@@ -41,7 +41,7 @@ export default function ProductPage() {
   );
 }
 
-//Make a product page that will display the book details
+// Make a product page that will display the book details
 // The book details will be fetched from the API using the book ID
 // The book ID will be passed as a URL parameter
 // The book details will be displayed in a card format

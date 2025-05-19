@@ -3,6 +3,7 @@
   flex-direction: column;
   align-items: center;
   min-height: 86vh;
+  background: linear-gradient(to bottom, #eef2f3, #ffffff);
 }
 
 .wishlist-title {
@@ -15,7 +16,7 @@
   margin-top: 1rem;
 }
 .wishlist-subtitle {
-  font-size: 1.5rem;
+  font-size: 1rem;
   color: #666666;
   margin-bottom: 2rem;
 }

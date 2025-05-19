@@ -21,9 +21,8 @@ function Navbar() {
         <Link to="/my-library">MY BOOKS</Link>
         <Link to="/wishlist">WISHLIST</Link>
         <Link to="/library-catalog">LIBRARY</Link>
-        <Link to="#">MY ACCOUNT </Link>
         <Link to="/cart">
-          <button className="cart-button">
+          <button className="navbar-cart-button">
             <img
               src="public/shopping-cart.png"
               alt="shopping cart image"
