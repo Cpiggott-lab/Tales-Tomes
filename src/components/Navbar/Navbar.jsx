@@ -24,8 +24,8 @@ function Navbar() {
         <Link to="/cart">
           <button className="navbar-cart-button">
             <img
-              src="public/shopping-cart.png"
-              alt="shopping cart image"
+              src="../../../public/shopping-cart.png"
+              alt="cart"
               className="cart-image"
             />
           </button>

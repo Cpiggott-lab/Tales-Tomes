@@ -4,7 +4,6 @@
   align-items: center;
   min-height: 86vh;
 }
-
 .library-catalog-title {
   display: flex;
   justify-content: center;
@@ -15,7 +14,6 @@
   width: 100%;
   margin-bottom: 1rem;
 }
-
 .book-list {
   display: flex;
   flex-direction: row;
@@ -26,12 +24,10 @@
   min-height: 60vh;
   margin-bottom: 3rem;
   padding: 0 1rem;
-  gap: 4rem;
   align-items: flex-start;
   background-color: white;
   border-radius: 20px;
 }
-
 .book-item {
   display: flex;
   flex-direction: column;
@@ -47,7 +43,6 @@
   background-color: ;
   margin-top: 2rem;
 }
-
 .book-item img,
 .book-cover {
   width: 120px;
@@ -56,7 +51,6 @@
   border: 1px solid black;
   border-radius: 14px;
 }
-
 .book-info {
   display: flex;
   flex-direction: column;
@@ -66,16 +60,13 @@
   box-sizing: border-box;
   padding-bottom: 1rem;
 }
-
 .book-title {
   font-size: 1rem;
   font-weight: bold;
   text-align: left;
   margin-top: 1rem;
   overflow-wrap: break-word;
-  background-color: #eef2f3;
 }
-
 .book-author {
   font-size: 0.8rem;
   font-weight: bold;
@@ -83,7 +74,6 @@
   margin: 0;
   overflow-wrap: break-word;
 }
-
 .book-card-button-container {
   display: flex;
   flex-direction: column;
@@ -92,7 +82,6 @@
   justify-content: center;
   align-items: center;
 }
-
 .book-card-button {
   display: flex;
   justify-content: center;
@@ -104,12 +93,10 @@
   transition: background-color 0.3s, transform 0.2s;
   padding: 0.5rem 1rem;
 }
-
 .book-card-button:hover {
   background-color: #4338ca;
   transform: translateY(-2px);
 }
-
 .library-catalog-subtitle {
   display: flex;
   justify-content: center;
@@ -119,14 +106,12 @@
   max-width: 60vw;
   margin-bottom: 2rem;
 }
-
 .library-catalog-header {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   width: 100%;
-
   margin-bottom: 2rem;
 }
 .button-group {

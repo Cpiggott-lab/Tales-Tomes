@@ -6,10 +6,7 @@ export default function useFetch(baseURL) {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const axiosInstance = axios.create({
-    baseURL,
-    // withCredentials: true,
-  });
+  const axiosInstance = axios.create({ baseURL });
 
   const fetcher = useCallback(
     async ({
@@ -30,11 +27,9 @@ export default function useFetch(baseURL) {
           timeout,
           cancelToken: source.token,
         });
-
-        setData(response);
+        setData(response.data);
         setError(null);
       } catch (err) {
-        console.error("Error in useFetch hook", err);
         setError(err.response ? err.response.data : err.message);
       } finally {
         setLoading(false);

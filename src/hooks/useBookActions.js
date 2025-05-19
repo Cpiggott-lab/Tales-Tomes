@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { booksService } from "../services/books.service";
-
+import { useBooksService } from "../services/useBooksService";
 export function useBookActions() {
   const [wishlist, setWishlist] = useState([]);
   const [cart, setCart] = useState([]);
-  const { postBooks, deleteBooks } = booksService();
+  const { postBooks, deleteBooks } = useBooksService();
 
   const normalizeKey = (key) =>
     typeof key === "string" ? key.replace("/works/", "") : "";

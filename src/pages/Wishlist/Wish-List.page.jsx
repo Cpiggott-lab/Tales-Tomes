@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import { booksService } from "../../services/books.service";
 import "./Wish-list.style.css";
 import BookList from "../../components/BookList";
+import { useBooksService } from "../../services/useBooksService";
 
 function WishlistPage() {
   const [wishlistBooks, setWishlistBooks] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { getBooks, deleteBooks, postBooks } = booksService();
+  const { getBooks, deleteBooks, postBooks } = useBooksService();
 
   const fetchWishlist = async () => {
     try {

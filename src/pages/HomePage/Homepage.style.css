@@ -6,24 +6,20 @@
   text-align: center;
   justify-content: center;
 }
-
 .logo-search-section {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
 }
-
 .logo-image {
   height: 300px;
   width: auto;
 }
-
 .search-form {
   display: flex;
   justify-content: center;
 }
-
 .search-input {
   padding: 0.75rem 1rem;
   border: 1px solid #d1d5db;
@@ -32,7 +28,6 @@
   width: 250px;
   margin-bottom: 2rem;
 }
-
 .search-button {
   padding: 0.75rem 1.5rem;
   background-color: #6366f1;
@@ -43,28 +38,24 @@
   cursor: pointer;
   transition: background-color 0.3s;
 }
-
 .search-button:hover {
   background-color: #4f46e5;
 }
-
 .homepage-title {
   font-size: 3rem;
   font-weight: bold;
   color: #333333;
   margin-bottom: 1rem;
 }
-
 .homepage-subtitle {
   font-size: 1.5rem;
   color: #666666;
   max-width: 600px;
   margin-bottom: 2rem;
 }
-
 .homepage-button {
   display: inline-block;
-  background-color: #4f46e5;
+  background-color: black;
   color: #ffffff;
   padding: 0.75rem 1.5rem;
   font-size: 1.1rem;
@@ -73,9 +64,8 @@
   transition: background-color 0.3s, transform 0.2s;
   margin-bottom: 1rem;
 }
-
 .homepage-button:hover {
-  background-color: #4338ca;
+  background-color: #666666;
   transform: translateY(-2px);
 }
 .search-results {

@@ -1,51 +1,83 @@
 .product-page {
-  display: flex;
-  flex-direction: column;
-  width: 100vw;
-  height: 100vh;
-  background: linear-gradient(to bottom, #eef2f3, #ffffff);
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #fdfdfd;
 }
 .product-page-title {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   font-size: 2rem;
-  font-weight: bold;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  width: 100%;
-  border-bottom: 1px solid #000000;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  text-align: center;
 }
 .book-details-container {
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  background-color: aquamarine;
+  gap: 2rem;
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 .book-cover-container {
+  flex: 1;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
-  width: 30vw;
-  height: 100vh;
-  margin-top: 4rem;
+}
+.product-page-book-cover {
+  width: 100%;
+  max-width: 250px;
+  height: auto;
+  border-radius: 8px;
+  object-fit: contain;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 .product-book-info-container {
+  flex: 2;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  width: 70vw;
-  height: 100vh;
-  gap: 1rem;
-  margin-top: 4rem;
+  justify-content: space-between;
+}
+.product-page-book-title {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+.product-page-book-id,
+.product-page-book-author {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 0.5rem;
+}
+.product-page-book-description {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-top: 1rem;
+  color: #444;
 }
 .product-page-buttons-container {
+  margin-top: 2rem;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
   gap: 1rem;
+  flex-wrap: wrap;
+}
+.product-page-button {
+  background-color: #0077cc;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.25rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 0.95rem;
+}
+.product-page-button:hover {
+  background-color: #005fa3;
+}
+.loading-book-details {
+  text-align: center;
+  font-size: 1.2rem;
+  padding: 2rem;
+  color: #777;
 }
