@@ -1,5 +1,3 @@
-import { normalizeKey } from "./NormalizedKey";
-
 export default function BookCardButtons({
   book,
   wishlist,
@@ -9,40 +7,43 @@ export default function BookCardButtons({
   addToCart,
   removeFromCart,
 }) {
-  // Normalize the key here to ensure matching across cart/wishlist. Without this the buttons dont work.
-  const normalizedKey = normalizeKey(book.key);
+  let isInWishlist = false;
+  let isInCart = false;
 
-  const isInWishlist = wishlist.some((item) => item.key === normalizedKey);
-  const isInCart = cart.some((item) => item.key === normalizedKey);
+  if (wishlist && Array.isArray(wishlist)) {
+    isInWishlist = wishlist.some((b) => b.key === book.key);
+  }
+
+  if (cart && Array.isArray(cart)) {
+    isInCart = cart.some((b) => b.key === book.key);
+  }
 
   return (
-    <div className="book-card-button-container">
-      {isInWishlist ? (
-        <button
-          onClick={() => removeFromWishlist(book)}
-          className="book-card-button"
-        >
-          REMOVE FROM WISHLIST
-        </button>
-      ) : (
-        <button
-          onClick={() => addToWishlist(book)}
-          className="book-card-button"
-        >
-          WISHLIST
+    <div className="button-group">
+      {addToWishlist && !isInWishlist && (
+        <button className="cart-button" onClick={() => addToWishlist(book)}>
+          Add to Wishlist
         </button>
       )}
 
-      {isInCart ? (
+      {removeFromWishlist && isInWishlist && (
         <button
-          onClick={() => removeFromCart(book)}
-          className="book-card-button"
+          className="cart-button"
+          onClick={() => removeFromWishlist(book)}
         >
-          REMOVE FROM CART
+          Remove from Wishlist
         </button>
-      ) : (
-        <button onClick={() => addToCart(book)} className="book-card-button">
-          ADD TO CART
+      )}
+
+      {addToCart && !isInCart && (
+        <button className="cart-button" onClick={() => addToCart(book)}>
+          Add to Cart
+        </button>
+      )}
+
+      {removeFromCart && (
+        <button className="cart-button" onClick={() => removeFromCart(book.id)}>
+          Remove from Cart
         </button>
       )}
     </div>

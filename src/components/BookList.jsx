@@ -12,6 +12,8 @@ function BookList({
   addToCart,
   removeFromCart,
   showDetails = false,
+  hideButtons = false,
+  showRemoveFromCart = false,
 }) {
   return (
     <div className="book-list">
@@ -47,17 +49,23 @@ function BookList({
                 <p className="book-author">by {truncatedAuthor}</p>
               </div>
 
-              <div className="book-actions">
-                <BookCardButtons
-                  book={{ ...book, key: normalizedKey }}
-                  wishlist={wishlist}
-                  cart={cart}
-                  addToWishlist={addToWishlist}
-                  removeFromWishlist={removeFromWishlist}
-                  addToCart={addToCart}
-                  removeFromCart={removeFromCart}
-                />
-              </div>
+              {(!hideButtons || showRemoveFromCart) && (
+                <div className="book-actions">
+                  <BookCardButtons
+                    book={{ ...book, key: normalizedKey }}
+                    wishlist={wishlist}
+                    cart={cart}
+                    addToWishlist={hideButtons ? undefined : addToWishlist}
+                    removeFromWishlist={
+                      hideButtons ? undefined : removeFromWishlist
+                    }
+                    addToCart={hideButtons ? undefined : addToCart}
+                    removeFromCart={
+                      showRemoveFromCart ? removeFromCart : undefined
+                    }
+                  />
+                </div>
+              )}
             </div>
           </div>
         );

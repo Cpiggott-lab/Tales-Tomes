@@ -33,15 +33,14 @@ function LibraryCatalog() {
           nonfiction, and more. Here you'll find the perfect book for every
           occasion. Be inspired and find your new favorite book now!
         </p>
-      </div>
-
-      <div className="search-bar-wrapper">
-        <Search
-          setBooks={(books) => {
-            setSearching(true); // when a search runs, stop infinite scroll and replace book list
-            setBooks(books);
-          }}
-        />
+        <div className="search-bar-wrapper">
+          <Search
+            setBooks={(books) => {
+              setSearching(true); // when a search runs, stop infinite scroll and replace book list
+              setBooks(books);
+            }}
+          />
+        </div>
       </div>
 
       <BookList
