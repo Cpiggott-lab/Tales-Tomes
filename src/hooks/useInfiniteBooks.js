@@ -2,14 +2,14 @@
 
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { booksService } from "../services/books.service";
+import { useBooksService } from "../services/useBooksService";
 
 export function useInfiniteBooks({ subject = "fiction", pause = false }) {
   const [books, setBooks] = useState([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
 
-  const { getBooks } = booksService();
+  const { getBooks } = useBooksService();
 
   // infinite scroll logic
   const fetchBooks = async () => {

@@ -5,7 +5,6 @@
   min-height: 86vh;
   background: linear-gradient(to bottom, #eef2f3, #ffffff);
 }
-
 .wishlist-title {
   display: flex;
   justify-content: center;
@@ -28,7 +27,6 @@
   margin-bottom: 3rem;
   padding: 0 1rem;
 }
-
 .wishlist-item {
   display: flex;
   flex-direction: row;
@@ -42,7 +40,6 @@
   background-color: #ffffff;
   border: 1px solid #dddddd;
 }
-
 .wishlist-cover {
   height: 100%;
   width: auto;
@@ -52,14 +49,12 @@
   border-radius: 14px;
   margin-right: 1rem;
 }
-
 .wishlist-book-title {
   font-size: 1.2rem;
   font-weight: bold;
   margin: 0;
   overflow-wrap: break-word;
 }
-
 .wishlist-book-author {
   font-size: 1rem;
   font-weight: bold;
@@ -67,7 +62,6 @@
   margin: 0;
   overflow-wrap: break-word;
 }
-
 .wishlist-button-container {
   display: flex;
   flex-direction: column;
@@ -75,7 +69,6 @@
   align-items: flex-end;
   gap: 0.5rem;
 }
-
 .wishlist-button {
   background-color: #4f46e5;
   color: #ffffff;
@@ -84,18 +77,15 @@
   transition: background-color 0.3s, transform 0.2s;
   padding: 0.5rem 1rem;
 }
-
 .wishlist-button:hover {
   background-color: #4338ca;
   transform: translateY(-2px);
 }
-
 .loading-list {
   font-size: 1.5rem;
   text-align: center;
   margin-top: 2rem;
 }
-
 .wishlist-empty {
   font-size: 2rem;
   text-align: center;

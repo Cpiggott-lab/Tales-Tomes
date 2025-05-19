@@ -6,32 +6,36 @@ function Footer() {
     <footer className="footer">
       <section className="link-section-container">
         <div className="link-section">
-          <img src="github.png" alt="github logo" className="favicon-logo" />
-          <a
+          <img
+            src="../../../public/github.png"
+            alt="github logo"
+            className="favicon-logo"
+          />
+          <Link
             href="https://github.com/Cpiggott-lab"
             target="_blank"
             className="link-name"
           >
             Visit my GitHub
-          </a>
+          </Link>
         </div>
         <div className="link-section">
           <img
-            src="linkedin.png"
+            src="../../../public/linkedin.png"
             alt="LinkedIn Logo"
             className="favicon-logo"
           />
-          <a
+          <Link
             href="https://www.linkedin.com/in/christopher-piggott-3bbb54351/"
             target="_blank"
             className="link-name"
           >
             Lets Connect on LinkedIn
-          </a>
+          </Link>
         </div>
         <div className="link-section">
           <img
-            src="profile-user.png"
+            src="../../../public/profile-user.png"
             alt="About me logo"
             className="favicon-logo"
           />

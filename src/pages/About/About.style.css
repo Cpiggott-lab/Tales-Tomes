@@ -8,7 +8,6 @@
   padding-bottom: 6rem;
   box-sizing: border-box;
 }
-
 .about-title {
   font-size: 3rem;
   font-weight: bold;
@@ -17,7 +16,6 @@
   border-bottom: 3px solid #000000;
   padding-bottom: 0.5rem;
 }
-
 .about-content {
   max-width: 800px;
   font-size: 1.2rem;
@@ -25,7 +23,6 @@
   text-align: left;
   color: #333333;
 }
-
 .about-content p {
   margin-bottom: 1.5rem;
 }
