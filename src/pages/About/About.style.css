@@ -11,10 +11,8 @@
 .about-title {
   font-size: 3rem;
   font-weight: bold;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   text-align: center;
-  border-bottom: 3px solid #000000;
-  padding-bottom: 0.5rem;
 }
 .about-content {
   max-width: 800px;
@@ -25,4 +23,7 @@
 }
 .about-content p {
   margin-bottom: 1.5rem;
+}
+body.dark-mode .about-content {
+  color: #e0e0e0;
 }

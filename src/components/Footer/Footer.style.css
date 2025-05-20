@@ -1,6 +1,6 @@
 .footer {
-  background-color: #6366f1;
-  color: white;
+  background-color: white;
+  color: black;
   position: fixed;
   bottom: 0;
   width: 100%;
@@ -9,16 +9,15 @@
   padding: 0.3rem;
   font-size: 0.9rem;
   margin-top: auto;
+  border-top: 2px solid rgba(0, 0, 0, 0.2);
 }
-
 .link-name {
-  color: #dbeafe;
+  color: black;
   text-decoration: none;
   font-size: 1rem;
   display: inline-block;
   transition: color 0.3s;
 }
-
 .footer-link:hover {
   color: #ffffff;
   text-decoration: underline;
@@ -40,4 +39,16 @@
   gap: 2rem;
   justify-content: center;
   margin-bottom: 0.5rem;
+}
+body.dark-mode .footer {
+  background-color: #1c1c1c;
+  color: #f0f0f0;
+  border-top: 2px solid rgba(255, 255, 255, 0.1);
+}
+body.dark-mode .link-name {
+  color: #f0f0f0;
+}
+body.dark-mode .footer-link:hover {
+  color: #ffffff;
+  text-decoration: underline;
 }

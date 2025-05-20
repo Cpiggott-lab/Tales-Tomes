@@ -6,26 +6,29 @@ import { useBooksService } from "../../services/useBooksService";
 function WishlistPage() {
   const [wishlistBooks, setWishlistBooks] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { getBooks, deleteBooks, postBooks } = useBooksService();
+  const { deleteBooks, postBooks } = useBooksService();
 
+  // Load wishlist from backend
   const fetchWishlist = async () => {
     try {
-      await getBooks("/wishlist");
-      const response = await fetch(
+      const res = await fetch(
         "https://tales-tomes-production.up.railway.app/wishlist"
       );
-      const data = await response.json();
+      const data = await res.json();
       setWishlistBooks(data);
-      setLoading(false);
     } catch (error) {
       console.error("Error fetching wishlist:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
+  // Run once on mount
   useEffect(() => {
     fetchWishlist();
   }, []);
 
+  // Remove book from wishlist
   const handleRemoveFromWishlist = async (book) => {
     try {
       await deleteBooks(`/wishlist/${book.id}`);
@@ -35,6 +38,7 @@ function WishlistPage() {
     }
   };
 
+  // Move book to cart and remove from wishlist
   const handleAddToCart = async (book) => {
     try {
       await postBooks("/cart", book);
@@ -45,9 +49,7 @@ function WishlistPage() {
     }
   };
 
-  if (loading) {
-    return <p className="loading-list">Loading wishlist...</p>;
-  }
+  if (loading) return <p className="loading-list">Loading wishlist...</p>;
 
   if (wishlistBooks.length === 0) {
     return <h1 className="wishlist-empty">Wishlist is empty!</h1>;
@@ -62,14 +64,16 @@ function WishlistPage() {
           choosing your next read.
         </p>
       </div>
+
+      {/* Reuse BookList with wishlist props */}
       <BookList
         books={wishlistBooks}
         wishlist={wishlistBooks}
         cart={[]}
-        addToWishlist={() => {}}
+        addToWishlist={() => {}} // disable add button
         removeFromWishlist={handleRemoveFromWishlist}
         addToCart={handleAddToCart}
-        removeFromCart={() => {}}
+        removeFromCart={() => {}} // disable remove from cart
         showDetails={true}
       />
     </div>

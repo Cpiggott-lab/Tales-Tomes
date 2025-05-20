@@ -2,8 +2,7 @@
   display: flex;
   flex-direction: column;
   width: 100vw;
-  height: 100vh;
-  background: linear-gradient(to bottom, #eef2f3, #ffffff);
+  height: 100%;
 }
 .my-library-title {
   display: flex;
@@ -12,79 +11,82 @@
   font-size: 2rem;
   font-weight: bold;
   padding-top: 1rem;
-  padding-bottom: 1rem;
-  margin-bottom: 1rem;
   width: 100%;
-  border-bottom: 1px solid #000000;
 }
 .library-catalog-container {
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  padding: 0 3rem;
   width: 100%;
-  height: 100%;
+  box-sizing: border-box;
+  gap: 3rem;
 }
-.owned-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  width: 100%;
-  height: 100%;
-}
-.owned-title {
-  font-size: 1.5rem;
-  border-bottom: 1px solid #000000;
-  margin-bottom: 1rem;
-}
-.owned-list {
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  background-color: yellow;
-}
-.reading-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  width: 100%;
-  height: 100%;
-}
-.reading-title {
-  font-size: 1.5rem;
-  border-bottom: 1px solid #000000;
-  margin-bottom: 1rem;
-}
-.reading-list {
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  background-color: green;
-}
+.owned-container,
+.reading-container,
 .finished-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  width: 100%;
-  height: 100%;
+  flex: 1;
+  border: 1px solid black;
+  border-radius: 10px;
+  background-color: white;
+  margin-bottom: 5rem;
+  padding-bottom: 1rem;
 }
+.owned-title,
+.reading-title,
 .finished-title {
-  font-size: 1.5rem;
-  border-bottom: 1px solid #000000;
+  font-size: 1rem;
   margin-bottom: 1rem;
+  text-align: center;
+  padding-top: 1rem;
 }
+.owned-list,
+.reading-list,
 .finished-list {
   display: flex;
-  align-items: flex-start;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   width: 100%;
-  height: 100%;
-  background-color: purple;
+  gap: 1rem;
+  padding: 0 0.5rem;
+}
+.book-card {
+  width: 100%;
+  max-width: 220px;
+  padding: 2rem;
+  background-color: #eef2f3;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  cursor: grab;
+  transition: box-shadow 0.2s ease;
+  text-align: center;
+}
+.book-card:active {
+  cursor: grabbing;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+.book-card-image-wrapper {
+  margin-bottom: 0.5rem;
+}
+.book-card-image {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  object-fit: cover;
+}
+.book-card-title {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+}
+.book-card-author {
+  font-size: 0.9rem;
+  color: #666;
+}
+.my-library-sub-header {
+  margin-bottom: 2rem;
 }

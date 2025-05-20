@@ -1,3 +1,4 @@
+import DarkModeToggle from "../DarkModeToggle";
 import "./Navbar.style.css";
 import { Link } from "react-router-dom";
 
@@ -17,10 +18,19 @@ function Navbar() {
         </Link>
       ))} */}
       <nav className="nav-links">
-        <Link to="/">HOME</Link>
+        <Link to="/" className="home-link-container">
+          <img
+            src="../../../public/ChatGPT Image May 14, 2025, 10_40_02 PM.png"
+            alt="logo"
+            className="tales-tomes-logo-navbar"
+          />
+        </Link>
         <Link to="/my-library">MY BOOKS</Link>
         <Link to="/wishlist">WISHLIST</Link>
         <Link to="/library-catalog">LIBRARY</Link>
+        <Link to="/about">ABOUT APP</Link>
+        <DarkModeToggle />
+
         <Link to="/cart">
           <button className="navbar-cart-button">
             <img

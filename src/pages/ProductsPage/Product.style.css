@@ -63,7 +63,7 @@
   flex-wrap: wrap;
 }
 .product-page-button {
-  background-color: #0077cc;
+  background-color: black;
   color: white;
   border: none;
   padding: 0.75rem 1.25rem;
@@ -73,7 +73,7 @@
   font-size: 0.95rem;
 }
 .product-page-button:hover {
-  background-color: #005fa3;
+  background-color: #666666;
 }
 .loading-book-details {
   text-align: center;

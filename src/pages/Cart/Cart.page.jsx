@@ -8,6 +8,7 @@ function CartPage() {
   const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // Fetch cart items from backend
   const fetchCart = async () => {
     try {
       await getBooks("/cart");
@@ -22,15 +23,18 @@ function CartPage() {
     }
   };
 
+  // Load cart when page mounts
   useEffect(() => {
     fetchCart();
   }, []);
 
+  // Calculate total price
   const totalPrice = cartItems.reduce(
     (acc, book) => acc + (book.price || 0),
     0
   );
 
+  // Delete every item from cart
   const clearCart = async () => {
     try {
       for (const book of cartItems) {
@@ -42,6 +46,7 @@ function CartPage() {
     }
   };
 
+  // Remove one item
   const removeItem = async (bookId) => {
     try {
       await deleteBooks(`/cart/${bookId}`);
@@ -51,6 +56,7 @@ function CartPage() {
     }
   };
 
+  // Move cart items to "owned" then clear them
   const handlePayClick = async (e) => {
     e.preventDefault();
     try {
@@ -64,8 +70,10 @@ function CartPage() {
     }
   };
 
+  // Loading state
   if (loading) return <p>Loading cart...</p>;
 
+  // Empty cart message
   if (cartItems.length === 0) {
     return (
       <div className="empty-cart">
@@ -80,6 +88,10 @@ function CartPage() {
       <h1 className="cart-title">Cart</h1>
       <div className="cart-page">
         <div className="cart-items-container">
+          <button className="cart-button-clear" onClick={clearCart}>
+            Clear Cart
+          </button>
+          {/* Show book cards with remove button */}
           <BookList
             books={cartItems}
             cart={cartItems}
@@ -88,9 +100,6 @@ function CartPage() {
             showRemoveFromCart={true}
             removeFromCart={removeItem}
           />
-          <button className="cart-button-clear" onClick={clearCart}>
-            Clear Cart
-          </button>
         </div>
 
         <div className="checkout-container">
@@ -98,34 +107,28 @@ function CartPage() {
             <h1>Checkout</h1>
             <h2>Total: €{totalPrice.toFixed(2)}</h2>
             <h2 className="items-in-cart">Items in Cart: {cartItems.length}</h2>
+
+            {/* Fake shipping form — no submission logic */}
             <form
               className="checkout-form-details"
               onSubmit={(e) => e.preventDefault()}
             >
               <label htmlFor="full-name">Full Name</label>
               <input type="text" id="full-name" name="full-name" required />
-
               <label htmlFor="email">Email</label>
               <input type="email" id="email" name="email" required />
-
               <label htmlFor="phone">Phone Number</label>
               <input type="tel" id="phone" name="phone" required />
-
               <label htmlFor="address">Street Address</label>
               <input type="text" id="address" name="address" required />
-
               <label htmlFor="address2">Address Line 2</label>
               <input type="text" id="address2" name="address2" />
-
               <label htmlFor="city">City</label>
               <input type="text" id="city" name="city" required />
-
               <label htmlFor="state">State/Province</label>
               <input type="text" id="state" name="state" required />
-
               <label htmlFor="zip">Zip / Postal Code</label>
               <input type="text" id="zip" name="zip" required />
-
               <label htmlFor="country">Country</label>
               <input type="text" id="country" name="country" required />
             </form>
@@ -134,6 +137,7 @@ function CartPage() {
           <div className="payment-form">
             <h1>Payment</h1>
 
+            {/* Payment options — no logic behind them */}
             <div className="payment-method-buttons">
               <button type="button" className="payment-method selected">
                 Credit Card
@@ -146,13 +150,12 @@ function CartPage() {
               </button>
             </div>
 
+            {/* Fake payment form */}
             <form className="payment-form-details" onSubmit={handlePayClick}>
               <label htmlFor="card-number">Card Number</label>
               <input type="text" id="card-number" name="card-number" />
-
               <label htmlFor="expiry-date">Expiry Date</label>
               <input type="text" id="expiry-date" name="expiry-date" />
-
               <label htmlFor="cvv">CVV</label>
               <input type="text" id="cvv" name="cvv" />
 
@@ -168,12 +171,3 @@ function CartPage() {
 }
 
 export default CartPage;
-
-// Need to render cart items as a list, need to add in price values to books in the library
-// add total for the books in the cart
-// add a checkout button
-// add a clear cart button
-// add a remove item button
-// add a remove all button
-// add payment options/form for payment options. Do not take information or offer to take info.
-// no functionality for the payment options

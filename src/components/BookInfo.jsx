@@ -1,3 +1,4 @@
+// Component to display a book's title and author
 function BookInfo({ title, author }) {
   return (
     <>

@@ -1,6 +1,6 @@
 // https://dev.to/surajondev/building-an-infinite-scroll-component-in-react-1ljb
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { useBooksService } from "../services/useBooksService";
 
@@ -11,20 +11,23 @@ export function useInfiniteBooks({ subject = "fiction", pause = false }) {
 
   const { getBooks } = useBooksService();
 
-  // infinite scroll logic
+  // fetch books from OpenLibrary API by subject & page
   const fetchBooks = async () => {
-    if (pause) return; // don't load more if we're searching
+    if (pause || loading) return; // don't load more if we're searching or already loading
+    setLoading(true); // mark loading before API call starts
     try {
       const response = await axios.get(
         `https://openlibrary.org/search.json?q=subject:${subject}&page=${page}`
       );
-      setBooks((prevBooks) => [...prevBooks, ...response.data.docs]);
-      setLoading(false);
+      setBooks((prevBooks) => [...prevBooks, ...response.data.docs]); // append books to current list
     } catch (error) {
       console.error("Error fetching books:", error);
+    } finally {
+      setLoading(false); // always stop loading after fetch attempt
     }
   };
 
+  // run every time page changes (triggered by scroll)
   useEffect(() => {
     fetchBooks();
   }, [page]);
@@ -41,16 +44,17 @@ export function useInfiniteBooks({ subject = "fiction", pause = false }) {
     fetchData();
   }, []);
 
+  // infinite scroll logic: detect when near bottom of page
   const handleScroll = () => {
     if (
-      document.body.scrollHeight - 300 <
-      window.scrollY + window.innerHeight
+      document.body.scrollHeight - 300 < window.scrollY + window.innerHeight &&
+      !loading // prevent triggering while still loading
     ) {
-      setLoading(true); // will trigger next page
+      setPage((prevPage) => prevPage + 1); // increase page to trigger new API fetch
     }
   };
 
-  // debounce reduced the rate of the scroll. stops the function from being called constantly.
+  // debounce reduces the rate of scroll checks; stops the function from being called constantly
   function debounce(func, delay) {
     let timeoutId;
     return function (...args) {
@@ -63,17 +67,12 @@ export function useInfiniteBooks({ subject = "fiction", pause = false }) {
     };
   }
 
+  // attach debounced scroll event listener on mount
   useEffect(() => {
     const debouncedScroll = debounce(handleScroll, 500);
     window.addEventListener("scroll", debouncedScroll);
     return () => window.removeEventListener("scroll", debouncedScroll);
-  }, []);
-
-  useEffect(() => {
-    if (loading) {
-      setPage((prevPage) => prevPage + 1);
-    }
-  }, [loading]);
+  }, [loading]); // re-attach if loading state changes
 
   return {
     books,

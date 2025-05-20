@@ -7,35 +7,52 @@ function AboutMePage() {
       <div className="about-content">
         <p>
           <strong>Tales & Tomes</strong> is a full-stack book catalog and
-          wishlist management application, built to practice modern web
-          development concepts including frontend frameworks, REST APIs, and
-          dynamic data handling.
+          personal library management app, built as a hands-on project to
+          explore real-world web development from frontend to backend.
         </p>
+
         <p>
-          The frontend is developed using <strong>React</strong> with{" "}
-          <strong>Vite</strong> for fast development and build processes.
-          Styling is handled through <strong>custom CSS</strong> to create
-          clean, responsive layouts for different sections like the library,
-          wishlist, and cart.
+          The frontend is built with <strong>React</strong> and uses{" "}
+          <strong>Vite</strong> for lightning-fast development. Styling is done
+          with <strong>custom CSS</strong> for clean, responsive layouts across
+          pages like the catalog, wishlist, cart, and personal library.
         </p>
+
         <p>
-          The app fetches real book data from the{" "}
-          <strong>OpenLibrary API</strong>, using <strong>Axios</strong> for API
-          calls. A mock backend server built with <strong>JSON Server</strong>{" "}
-          is used to simulate a database, handling wishlist and cart
-          functionality with real POST and DELETE operations.
+          Book data comes from the <strong>OpenLibrary API</strong>, while
+          features like wishlisting, shopping cart, and owned book tracking are
+          powered by a <strong>mock backend</strong> built using{" "}
+          <strong>JSON Server</strong>. The app supports full CRUD operations
+          via <strong>Axios</strong> with a structured service layer.
         </p>
+
         <p>
-          State management is handled through <strong>React hooks</strong> like{" "}
-          <code>useState</code> and <code>useEffect</code>. The application uses{" "}
-          <strong>infinite scroll</strong> to dynamically load more books as the
-          user navigates, improving performance and user experience.
+          Users can search for books with live queries and a dynamic{" "}
+          <strong>infinite scroll</strong> system that pauses when searching is
+          active. State is managed using <code>useState</code>,{" "}
+          <code>useEffect</code>, and custom hooks like{" "}
+          <code>useBookActions</code> and <code>useInfiniteBooks</code> to keep
+          logic modular and maintainable.
         </p>
+
         <p>
-          Overall, Tales & Tomes is a hands-on project designed to practice API
-          integration, backend communication, state updates, conditional
-          rendering, user actions (like adding and removing items), and building
-          a scalable, component-based application.
+          A major feature is the personalized library with drag-and-drop
+          support, built using <strong>@dnd-kit/core</strong>. Users can move
+          books between "Owned", "Reading", and "Finished" columns, and changes
+          are reflected both in the UI and backend instantly.
+        </p>
+
+        <p>
+          The entire app is built with reusable components like{" "}
+          <code>BookList</code>, <code>BookCardButtons</code>, and{" "}
+          <code>Search</code> to ensure a scalable and consistent UI.
+        </p>
+
+        <p>
+          This project was created to practice real-world skills like component
+          structure, RESTful API integration, conditional rendering, state
+          transitions, and building a clean, user-friendly experience from
+          scratch.
         </p>
       </div>
     </div>
