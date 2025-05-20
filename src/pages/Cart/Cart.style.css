@@ -5,16 +5,14 @@
   width: 100%;
   background-color: #fefefe;
 }
-
 .cart-title {
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: bold;
   padding: 1rem 0;
   text-align: center;
   width: 100%;
   background-color: #fafafa;
 }
-
 .cart-page {
   display: flex;
   flex-direction: row;
@@ -23,10 +21,9 @@
   width: 100%;
   gap: 2rem;
   background-color: #f7f7f7;
-  padding: 2rem 0;
+  padding-bottom: 2rem;
   margin-bottom: 5vh;
 }
-
 .cart-items-container {
   display: flex;
   flex-direction: column;
@@ -39,11 +36,9 @@
   min-height: 100vh;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
 }
-
 .cart-list {
   width: 100%;
 }
-
 .cart-item {
   display: flex;
   flex-direction: column;
@@ -55,13 +50,11 @@
   border-radius: 8px;
   background-color: #fdfdfd;
 }
-
 .cart-item-cover img {
   height: 220px;
   width: auto;
   border-radius: 8px;
 }
-
 .cart-item-info {
   display: flex;
   flex-direction: column;
@@ -71,7 +64,6 @@
   font-weight: 500;
   color: #333;
 }
-
 .cart-button {
   background-color: hsl(0, 0%, 13%);
   color: white;
@@ -83,11 +75,9 @@
   margin-top: 0.5rem;
   transition: background-color 0.3s ease;
 }
-
 .cart-button:hover {
   background-color: #444;
 }
-
 .checkout-container {
   display: flex;
   flex-direction: column;
@@ -100,12 +90,10 @@
   gap: 2rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
 }
-
 .details-form,
 .payment-form {
   width: 100%;
 }
-
 .checkout-form-details,
 .payment-form-details {
   display: flex;
@@ -113,7 +101,6 @@
   gap: 0.75rem;
   width: 100%;
 }
-
 .checkout-form-details input,
 .payment-form-details input {
   width: 100%;
@@ -122,20 +109,17 @@
   border-radius: 6px;
   font-size: 1rem;
 }
-
 .checkout-form-details label,
 .payment-form-details label {
   font-weight: 600;
   font-size: 0.95rem;
   color: #444;
 }
-
 .payment-method-buttons {
   display: flex;
   gap: 0.5rem;
   margin-bottom: 1rem;
 }
-
 .payment-method {
   padding: 0.5rem 1rem;
   background-color: white;
@@ -144,13 +128,11 @@
   cursor: pointer;
   font-size: 0.9rem;
 }
-
 .payment-method.selected {
   background-color: #222;
   color: white;
   border-color: #222;
 }
-
 .payment-success-message {
   text-align: center;
   padding: 2rem;

@@ -2,7 +2,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 86vh;
+  min-height: 90vh;
+  background-color: #eef2f3;
 }
 .library-catalog-title {
   display: flex;
@@ -12,17 +13,15 @@
   font-weight: bold;
   padding-top: 1rem;
   width: 100%;
-  margin-bottom: 1rem;
 }
 .book-list {
   display: flex;
   flex-direction: row;
-  align-items: center;
   justify-content: center;
   flex-wrap: wrap;
   width: 85%;
-  min-height: 60vh;
-  margin-bottom: 3rem;
+  min-height: 69vh;
+  margin-bottom: 5rem;
   padding: 0 1rem;
   align-items: flex-start;
   background-color: white;
@@ -40,7 +39,7 @@
   padding: 1rem;
   box-sizing: border-box;
   border: rgba(0, 0, 0, 0.2) 1px solid;
-  background-color: ;
+  background-color: #eef2f3;
   margin-top: 2rem;
 }
 .book-item img,
@@ -104,7 +103,7 @@
   font-size: 1rem;
   color: #666666;
   max-width: 60vw;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 .library-catalog-header {
   display: flex;
@@ -112,7 +111,6 @@
   align-items: center;
   flex-direction: column;
   width: 100%;
-  margin-bottom: 2rem;
 }
 .button-group {
   display: flex;
@@ -120,4 +118,16 @@
   justify-content: center;
   align-items: center;
   width: 100%;
+}
+.Loading-message-catalog {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+}
+.book-item {
+  transition: transform 0.2s ease;
+}
+.book-item:hover {
+  transform: scale(1.08);
 }

@@ -1,39 +1,160 @@
-// https://tales-tomes-production.up.railway.app/library
+// https://dndkit.com/
+import { DndContext, useDraggable, useDroppable } from "@dnd-kit/core";
+import { useEffect, useState } from "react";
 import "./My-library.style.css";
-function MyLibraryPage() {
-  // Owned fetch
+import { useBooksService } from "../../services/useBooksService";
 
-  // reading fetch
+// Draggable card for each book
+function BookCard({ book, from }) {
+  const { attributes, listeners, setNodeRef, transform } = useDraggable({
+    id: book.id,
+    data: { book, from },
+  });
 
-  // finished fetch
+  // Apply drag transform
+  let style;
+  if (transform) {
+    style = {
+      transform: `translate(${transform.x}px, ${transform.y}px)`,
+    };
+  }
+
+  // Build cover image
+  let imageUrl = "";
+  if (book.cover_i) {
+    imageUrl = `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`;
+  }
 
   return (
-    <div className="library-catalog">
-      <h1 className="my-library-title">My Library</h1>
-      <div className="library-catalog-container">
-        <div className="owned-container">
-          <h1 className="owned-title">Owned</h1>
-          <div className="owned-list">list</div>
-        </div>
-        <div className="reading-container">
-          <h1 className="reading-title">Reading</h1>
-          <div className="reading-list">list</div>
-        </div>
-        <div className="finished-container">
-          <h1 className="finished-title">Finished</h1>
-          <div className="finished-list">list</div>
-        </div>
+    <div
+      ref={setNodeRef}
+      className="book-card"
+      style={style}
+      {...listeners}
+      {...attributes}
+    >
+      <div className="book-card-image-wrapper">
+        <img src={imageUrl} alt={book.title} className="book-card-image" />
+      </div>
+      <div className="book-card-text">
+        <h1 className="book-card-title">{book.title}</h1>
+        <p className="book-card-author">
+          {book.author_name && book.author_name[0]}
+        </p>
       </div>
     </div>
   );
 }
-export default MyLibraryPage;
 
-// tasks to do still
-// add 3 main containers, in a row where each will be a spanning list
-// container 1 will be owned books,
-// container 2 will be current books reading,
-// container 3 will be books read
-// need to be able to drag and drop books between the containers
-// each container needs an additional API section. Books Read, Books Owned and Books finished.
-// when purchased the books will be moved to the owned books container
+// Droppable column container
+function LibraryColumn({ id, title, books, className }) {
+  const { setNodeRef } = useDroppable({ id });
+
+  return (
+    <div ref={setNodeRef} className={`${className}-container`}>
+      <h1 className={`${className}-title`}>{title}</h1>
+      <div className={`${className}-list`}>
+        {books.map((book) => (
+          <BookCard key={book.id} book={book} from={id} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// Main library page with drag-and-drop columns
+export default function MyLibraryPage() {
+  const { getBooks, postBooks, deleteBooks } = useBooksService();
+
+  // State for each column
+  const [owned, setOwned] = useState([]);
+  const [reading, setReading] = useState([]);
+  const [finished, setFinished] = useState([]);
+
+  // Load all book lists on page load
+  useEffect(() => {
+    const load = async () => {
+      // Reusable fetch for each list
+      const loadList = async (path, setter) => {
+        await getBooks(path); // optional: doesn't update local state
+        const res = await fetch(
+          `https://tales-tomes-production.up.railway.app${path}`
+        );
+        const data = await res.json();
+        setter(data);
+      };
+
+      await loadList("/owned", setOwned);
+      await loadList("/reading", setReading);
+      await loadList("/finished", setFinished);
+    };
+
+    load();
+  }, []);
+
+  // When drag ends
+  const handleDragEnd = async (event) => {
+    const { active, over } = event;
+    if (!over) return;
+
+    const activeData = active.data.current;
+    if (!activeData || activeData.from === over.id) return;
+
+    const book = activeData.book;
+    const from = activeData.from;
+    const to = over.id;
+
+    try {
+      // Update backend
+      await postBooks(`/${to}`, book);
+      await deleteBooks(`/${from}/${book.id}`);
+
+      // Remove from old list
+      const removeFrom = (list, id) => list.filter((b) => b.id !== id);
+      if (from === "owned") setOwned((prev) => removeFrom(prev, book.id));
+      if (from === "reading") setReading((prev) => removeFrom(prev, book.id));
+      if (from === "finished") setFinished((prev) => removeFrom(prev, book.id));
+
+      // Add to new list
+      const addTo = (list, book) => [...list, book];
+      if (to === "owned") setOwned((prev) => addTo(prev, book));
+      if (to === "reading") setReading((prev) => addTo(prev, book));
+      if (to === "finished") setFinished((prev) => addTo(prev, book));
+    } catch (err) {
+      console.error("Failed to move book:", err);
+    }
+  };
+
+  return (
+    <div className="library-catalog">
+      <h1 className="my-library-title">My Library</h1>
+      <p className="my-library-sub-header">
+        A book is a gift you can open again and again. -Garrison Keillor
+      </p>
+
+      {/* DnD kit context wrapper */}
+      <DndContext onDragEnd={handleDragEnd}>
+        <div className="library-catalog-container">
+          <LibraryColumn
+            id="owned"
+            title="Owned"
+            books={owned}
+            className="owned"
+          />
+          <LibraryColumn
+            id="reading"
+            title="Reading"
+            books={reading}
+            className="reading"
+          />
+          <LibraryColumn
+            id="finished"
+            title="Finished"
+            books={finished}
+            className="finished"
+          />
+        </div>
+      </DndContext>
+    </div>
+  );
+}

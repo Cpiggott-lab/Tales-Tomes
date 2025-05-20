@@ -33,16 +33,6 @@ function Footer() {
             Lets Connect on LinkedIn
           </Link>
         </div>
-        <div className="link-section">
-          <img
-            src="../../../public/profile-user.png"
-            alt="About me logo"
-            className="favicon-logo"
-          />
-          <Link to="/about" className="link-name">
-            About
-          </Link>
-        </div>
       </section>
       <p>&copy; 2025 Tales & Tomes. All rights reserved.</p>
     </footer>

@@ -2,9 +2,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: linear-gradient(to bottom, #eef2f3, #ffffff);
+  background: #eef2f3;
   text-align: center;
   justify-content: center;
+  padding-bottom: 8rem;
 }
 .logo-search-section {
   display: flex;
@@ -28,19 +29,7 @@
   width: 250px;
   margin-bottom: 2rem;
 }
-.search-button {
-  padding: 0.75rem 1.5rem;
-  background-color: #6366f1;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 0.8rem;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-.search-button:hover {
-  background-color: #4f46e5;
-}
+
 .homepage-title {
   font-size: 3rem;
   font-weight: bold;
@@ -77,6 +66,10 @@
   background-color: #eef2f3;
   list-style-type: none;
 }
+.search-input:focus {
+  border-color: black;
+  outline: none;
+}
 .book-list {
   display: flex;
   flex-wrap: wrap;
@@ -84,4 +77,35 @@
   align-items: flex-start;
   gap: 1rem;
   padding: 1rem;
+}
+body.dark-mode {
+  background-color: #121212;
+  color: #f0f0f0;
+}
+body.dark-mode .homepage {
+  background-color: #1c1c1c;
+}
+body.dark-mode .search-results {
+  background-color: #1c1c1c;
+}
+body.dark-mode .homepage-title {
+  color: #ffffff;
+}
+body.dark-mode .homepage-subtitle {
+  color: #bbbbbb;
+}
+body.dark-mode .search-input {
+  background-color: #2a2a2a;
+  color: #f0f0f0;
+  border-color: #444;
+}
+body.dark-mode .search-input:focus {
+  border-color: #888;
+}
+body.dark-mode .homepage-button {
+  background-color: #333;
+  color: #fff;
+}
+body.dark-mode .homepage-button:hover {
+  background-color: #555;
 }
