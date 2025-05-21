@@ -1,7 +1,8 @@
 import DarkModeToggle from "../DarkModeToggle";
 import "./Navbar.style.css";
 import { Link } from "react-router-dom";
-
+import cartImage from "../../Assets/shopping-cart.png";
+import talesLogo from "../../Assets/ChatGPT Image May 14, 2025, 10_40_02 PM.png";
 const navLikns = [
   { name: "HOME", path: "/" },
   { name: "MY BOOKS", path: "/my-library" },
@@ -19,11 +20,7 @@ function Navbar() {
       ))} */}
       <nav className="nav-links">
         <Link to="/" className="home-link-container">
-          <img
-            src="../../../public/ChatGPT Image May 14, 2025, 10_40_02 PM.png"
-            alt="logo"
-            className="tales-tomes-logo-navbar"
-          />
+          <img src={talesLogo} alt="logo" className="tales-tomes-logo-navbar" />
         </Link>
         <Link to="/my-library">MY BOOKS</Link>
         <Link to="/wishlist">WISHLIST</Link>
@@ -33,11 +30,7 @@ function Navbar() {
 
         <Link to="/cart">
           <button className="navbar-cart-button">
-            <img
-              src="../../../public/shopping-cart.png"
-              alt="cart"
-              className="cart-image"
-            />
+            <img src={cartImage} alt="cart" className="cart-image" />
           </button>
         </Link>
       </nav>
