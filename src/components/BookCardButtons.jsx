@@ -1,38 +1,53 @@
-// Renders buttons to add/remove a book from wishlist or cart
 import React from "react";
-function BookCardButtons({
-  book,
-  wishlist,
-  cart,
-  addToWishlist,
-  removeFromWishlist,
-  addToCart,
-  removeFromCart,
-}) {
+
+// Renders buttons to add/remove a book from wishlist or cart
+function BookCardButtons(props) {
+  const {
+    book,
+    wishlist,
+    cart,
+    addToWishlist,
+    removeFromWishlist,
+    addToCart,
+    removeFromCart,
+  } = props;
+
+  // Check if book is already in wishlist
   let isInWishlist = false;
-  let isInCart = false;
-
-  // Check if book is in wishlist
   if (wishlist && Array.isArray(wishlist)) {
-    isInWishlist = wishlist.some((b) => b.key === book.key);
+    for (let i = 0; i < wishlist.length; i++) {
+      const item = wishlist[i];
+      if (item.key === book.key) {
+        isInWishlist = true;
+        break;
+      }
+    }
   }
 
-  // Check if book is in cart
+  // Check if book is already in cart
+  let isInCart = false;
   if (cart && Array.isArray(cart)) {
-    isInCart = cart.some((b) => b.key === book.key);
+    for (let i = 0; i < cart.length; i++) {
+      const item = cart[i];
+      if (item.key === book.key) {
+        isInCart = true;
+        break;
+      }
+    }
   }
 
+  // Render action buttons
   return (
     <div className="button-group">
       {/* Show if book not in wishlist */}
-      {addToWishlist && !isInWishlist && (
+      {addToWishlist && isInWishlist === false && (
         <button className="cart-button" onClick={() => addToWishlist(book)}>
           Add to Wishlist
         </button>
       )}
 
-      {/* Show if book already in wishlist */}
-      {removeFromWishlist && isInWishlist && (
+      {/* Show if book is already in wishlist */}
+      {removeFromWishlist && isInWishlist === true && (
         <button
           className="cart-button"
           onClick={() => removeFromWishlist(book)}
@@ -42,7 +57,7 @@ function BookCardButtons({
       )}
 
       {/* Show if book not in cart */}
-      {addToCart && !isInCart && (
+      {addToCart && isInCart === false && (
         <button className="cart-button" onClick={() => addToCart(book)}>
           Add to Cart
         </button>
@@ -58,5 +73,5 @@ function BookCardButtons({
   );
 }
 
-// only renders again if the props change. Attempt at optimization.
+// Optimization: only rerenders if props actually change
 export default React.memo(BookCardButtons);

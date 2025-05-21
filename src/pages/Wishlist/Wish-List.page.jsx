@@ -6,7 +6,7 @@ import { useBooksService } from "../../services/useBooksService";
 function WishlistPage() {
   const [wishlistBooks, setWishlistBooks] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { deleteBooks, postBooks } = useBooksService();
+  const { deleteBooks, postBooks } = useBooksService(); //bringing iin Services
 
   // Load wishlist from backend
   const fetchWishlist = async () => {
@@ -32,7 +32,14 @@ function WishlistPage() {
   const handleRemoveFromWishlist = async (book) => {
     try {
       await deleteBooks(`/wishlist/${book.id}`);
-      setWishlistBooks((prev) => prev.filter((b) => b.id !== book.id));
+
+      setWishlistBooks((previousBooks) => {
+        const filteredBooks = previousBooks.filter((b) => {
+          return b.id !== book.id;
+        });
+
+        return filteredBooks;
+      });
     } catch (error) {
       console.error("Error removing from wishlist:", error);
     }
@@ -42,8 +49,16 @@ function WishlistPage() {
   const handleAddToCart = async (book) => {
     try {
       await postBooks("/cart", book);
+
       await deleteBooks(`/wishlist/${book.id}`);
-      setWishlistBooks((prev) => prev.filter((b) => b.id !== book.id));
+
+      setWishlistBooks((previousBooks) => {
+        const filteredBooks = previousBooks.filter((b) => {
+          return b.id !== book.id;
+        });
+
+        return filteredBooks;
+      });
     } catch (error) {
       console.error("Error adding to cart:", error);
     }

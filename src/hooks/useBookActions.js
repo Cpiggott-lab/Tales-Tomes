@@ -4,6 +4,7 @@ import { useBooksService } from "../services/useBooksService";
 
 // Custom hook to handle wishlist/cart logic
 export function useBookActions() {
+  // Local state for wishlist and cart
   const [wishlist, setWishlist] = useState([]);
   const [cart, setCart] = useState([]);
 
@@ -11,24 +12,43 @@ export function useBookActions() {
   const { postBooks, deleteBooks } = useBooksService();
 
   // Strips unwanted path from book key
-  const normalizeKey = (key) =>
-    typeof key === "string" ? key.replace("/works/", "") : "";
+  const normalizeKey = (key) => {
+    if (typeof key === "string") {
+      return key.replace("/works/", "");
+    }
+    return "";
+  };
 
   // Add book to wishlist if not already there
   const addToWishlist = async (book) => {
     const key = normalizeKey(book.key);
-    if (wishlist.some((item) => item.key === key)) return;
+
+    const alreadyInWishlist = wishlist.some((item) => {
+      return item.key === key;
+    });
+
+    if (alreadyInWishlist) {
+      return;
+    }
 
     try {
       const response = await postBooks("/wishlist", book);
+
       const added = response?.data;
-      if (!added?.id) return;
+      if (!added || !added.id) {
+        return;
+      }
 
       // Add to local state
-      setWishlist((prev) => [
-        ...prev,
-        { key: normalizeKey(book.key), id: added.id },
-      ]);
+      setWishlist((previousList) => {
+        return [
+          ...previousList,
+          {
+            key: key,
+            id: added.id,
+          },
+        ];
+      });
     } catch (error) {
       console.error("Error adding book to wishlist:", error);
     }
@@ -37,12 +57,24 @@ export function useBookActions() {
   // Remove book from wishlist
   const removeFromWishlist = async (book) => {
     try {
-      const normalizedKey = normalizeKey(book.key);
-      const item = wishlist.find((item) => item.key === normalizedKey);
-      if (!item) return;
+      const key = normalizeKey(book.key);
+
+      const item = wishlist.find((entry) => {
+        return entry.key === key;
+      });
+
+      if (!item) {
+        return;
+      }
 
       await deleteBooks(`/wishlist/${item.id}`);
-      setWishlist((prev) => prev.filter((item) => item.key !== normalizedKey));
+
+      setWishlist((previousList) => {
+        const updatedList = previousList.filter((entry) => {
+          return entry.key !== key;
+        });
+        return updatedList;
+      });
     } catch (error) {
       console.error("Error removing book from wishlist:", error);
     }
@@ -51,18 +83,33 @@ export function useBookActions() {
   // Add book to cart if not already there
   const addToCart = async (book) => {
     const key = normalizeKey(book.key);
-    if (cart.some((item) => item.key === key)) return;
+
+    const alreadyInCart = cart.some((item) => {
+      return item.key === key;
+    });
+
+    if (alreadyInCart) {
+      return;
+    }
 
     try {
       const response = await postBooks("/cart", book);
+
       const added = response?.data;
-      if (!added?.id) return;
+      if (!added || !added.id) {
+        return;
+      }
 
       // Add to local state
-      setCart((prev) => [
-        ...prev,
-        { key: normalizeKey(book.key), id: added.id },
-      ]);
+      setCart((previousList) => {
+        return [
+          ...previousList,
+          {
+            key: key,
+            id: added.id,
+          },
+        ];
+      });
     } catch (error) {
       console.error("Error adding book to cart:", error);
     }
@@ -71,12 +118,24 @@ export function useBookActions() {
   // Remove book from cart
   const removeFromCart = async (book) => {
     try {
-      const normalizedKey = normalizeKey(book.key);
-      const item = cart.find((item) => item.key === normalizedKey);
-      if (!item) return;
+      const key = normalizeKey(book.key);
+
+      const item = cart.find((entry) => {
+        return entry.key === key;
+      });
+
+      if (!item) {
+        return;
+      }
 
       await deleteBooks(`/cart/${item.id}`);
-      setCart((prev) => prev.filter((item) => item.key !== normalizedKey));
+
+      setCart((previousList) => {
+        const updatedList = previousList.filter((entry) => {
+          return entry.key !== key;
+        });
+        return updatedList;
+      });
     } catch (error) {
       console.error("Error removing book from cart:", error);
     }
@@ -89,26 +148,36 @@ export function useBookActions() {
         const wishRes = await axios.get(
           "https://tales-tomes-production.up.railway.app/wishlist"
         );
-        setWishlist(
-          wishRes.data
-            .filter((book) => typeof book.key === "string")
-            .map((book) => ({
-              key: normalizeKey(book.key),
-              id: book.id,
-            }))
-        );
+
+        const wishlistData = wishRes.data.filter((book) => {
+          return typeof book.key === "string";
+        });
+
+        const formattedWishlist = wishlistData.map((book) => {
+          return {
+            key: normalizeKey(book.key),
+            id: book.id,
+          };
+        });
+
+        setWishlist(formattedWishlist);
 
         const cartRes = await axios.get(
           "https://tales-tomes-production.up.railway.app/cart"
         );
-        setCart(
-          cartRes.data
-            .filter((book) => typeof book.key === "string")
-            .map((book) => ({
-              key: normalizeKey(book.key),
-              id: book.id,
-            }))
-        );
+
+        const cartData = cartRes.data.filter((book) => {
+          return typeof book.key === "string";
+        });
+
+        const formattedCart = cartData.map((book) => {
+          return {
+            key: normalizeKey(book.key),
+            id: book.id,
+          };
+        });
+
+        setCart(formattedCart);
       } catch (err) {
         console.error("Error loading wishlist/cart:", err);
       }
@@ -117,7 +186,7 @@ export function useBookActions() {
     fetchLists();
   }, []);
 
-  // show all actions and data to components
+  // Show all actions and data to components
   return {
     wishlist,
     cart,
