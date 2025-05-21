@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useBooksService } from "../../services/useBooksService";
 import BookList from "../../components/BookList";
-import "./cart.style.css";
+import "./Cart.style.css";
 
 function CartPage() {
   const { getBooks, deleteBooks, postBooks } = useBooksService();
