@@ -1,16 +1,13 @@
 import "./Footer.style.css";
 import { Link } from "react-router-dom";
-
+import githubLogo from "../../Assets/github.png";
+import linkedinLogo from "../../Assets/linkedin.png";
 function Footer() {
   return (
     <footer className="footer">
       <section className="link-section-container">
         <div className="link-section">
-          <img
-            src="../../../public/github.png"
-            alt="github logo"
-            className="favicon-logo"
-          />
+          <img src={githubLogo} alt="github logo" className="favicon-logo" />
           <Link
             href="https://github.com/Cpiggott-lab"
             target="_blank"
@@ -21,7 +18,7 @@ function Footer() {
         </div>
         <div className="link-section">
           <img
-            src="../../../public/linkedin.png"
+            src={linkedinLogo}
             alt="LinkedIn Logo"
             className="favicon-logo"
           />
