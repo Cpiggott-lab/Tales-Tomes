@@ -4,35 +4,52 @@ import BookList from "../../components/BookList";
 import "./cart.style.css";
 
 function CartPage() {
-  const { getBooks, deleteBooks, postBooks } = useBooksService();
-  const [cartItems, setCartItems] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const {
+    getBooks,
+    data: cartItems,
+    loading: getBooksLoading,
+    error: getBooksError,
+  } = useBooksService();
+  const {
+    deleteBooks,
+    data: deleteBooksData,
+    loading: deleteBooksLoading,
+    error: deleteBooksError,
+  } = useBooksService();
+  const {
+    postBooks,
+    data: postBooksData,
+    loading: postBooksLoading,
+    error: postBooksError,
+  } = useBooksService();
+  // const [cartItems, setCartItems] = useState([]);
+  // const [loading, setLoading] = useState(true);
 
   // Fetch cart items from backend
-  const fetchCart = async () => {
-    try {
-      await getBooks("/cart");
-      const response = await fetch(
-        "https://tales-tomes-production.up.railway.app/cart"
-      );
-      const data = await response.json();
-      setCartItems(data);
-      setLoading(false);
-    } catch (error) {
-      console.error("Error fetching cart:", error);
-    }
-  };
+  // const fetchCart = async () => {
+  //   try {
+  //     await getBooks("/cart");
+  //     const response = await fetch(
+  //       "https://tales-tomes-production.up.railway.app/cart"
+  //     );
+  //     const data = await response.json();
+  //     setCartItems(data);
+  //     setLoading(false);
+  //   } catch (error) {
+  //     console.error("Error fetching cart:", error);
+  //   }
+  // };
 
   // Load cart when page mounts
   useEffect(() => {
-    fetchCart();
+    getBooks("/cart");
   }, []);
 
   // Calculate total price
-  const totalPrice = cartItems.reduce(
-    (acc, book) => acc + (book.price || 0),
-    0
-  );
+  // const totalPrice = cartItems.reduce(
+  //   (acc, book) => acc + (book.price || 0),
+  //   0
+  // );
 
   // Delete every item from cart
   const clearCart = async () => {
@@ -40,17 +57,17 @@ function CartPage() {
       for (const book of cartItems) {
         await deleteBooks(`/cart/${book.id}`);
       }
-      setCartItems([]);
+      await getBooks("/cart");
     } catch (error) {
       console.error("Error clearing cart:", error);
     }
   };
 
   // Remove one item
-  const removeItem = async (bookId) => {
+  const removeItem = async (book) => {
     try {
-      await deleteBooks(`/cart/${bookId}`);
-      setCartItems((prev) => prev.filter((b) => b.id !== bookId));
+      await deleteBooks(`/cart/${book.id}`);
+      await getBooks("/cart");
     } catch (error) {
       console.error("Error removing item:", error);
     }
@@ -64,17 +81,18 @@ function CartPage() {
         await postBooks("/owned", book);
         await deleteBooks(`/cart/${book.id}`);
       }
-      setCartItems([]);
+      await getBooks("/cart");
     } catch (error) {
       console.error("Error moving books to owned:", error);
     }
   };
 
   // Loading state
-  if (loading) return <p>Loading cart...</p>;
+  if (getBooksLoading || deleteBooksLoading || postBooksLoading || !cartItems)
+    return <p>Loading cart...</p>;
 
   // Empty cart message
-  if (cartItems.length === 0) {
+  if (cartItems && cartItems.length === 0) {
     return (
       <div className="empty-cart">
         <h1>Your cart is empty!</h1>
@@ -97,7 +115,7 @@ function CartPage() {
             cart={cartItems}
             showDetails={true}
             hideButtons={true}
-            showRemoveFromCart={true}
+            // showRemoveFromCart={true}
             removeFromCart={removeItem}
           />
         </div>
@@ -105,7 +123,7 @@ function CartPage() {
         <div className="checkout-container">
           <div className="details-form">
             <h1>Checkout</h1>
-            <h2>Total: €{totalPrice.toFixed(2)}</h2>
+            {/* <h2>Total: €{totalPrice.toFixed(2)}</h2> */}
             <h2 className="items-in-cart">Items in Cart: {cartItems.length}</h2>
 
             {/* Fake shipping form — no submission logic */}

@@ -4,12 +4,10 @@ import { useBooksService } from "../services/useBooksService";
 
 // Custom hook to handle wishlist/cart logic
 export function useBookActions() {
-  // Local state for wishlist and cart
   const [wishlist, setWishlist] = useState([]);
-  const [cart, setCart] = useState([]);
-
-  // Pull API functions from service
-  const { postBooks, deleteBooks } = useBooksService();
+  const { postBooks, data: postBooksData } = useBooksService();
+  const { getBooks, data: cart } = useBooksService();
+  const { deleteBooks, data: deleteData } = useBooksService();
 
   // Strips unwanted path from book key
   const normalizeKey = (key) => {
@@ -82,60 +80,17 @@ export function useBookActions() {
 
   // Add book to cart if not already there
   const addToCart = async (book) => {
-    const key = normalizeKey(book.key);
-
-    const alreadyInCart = cart.some((item) => {
-      return item.key === key;
-    });
-
-    if (alreadyInCart) {
-      return;
-    }
-
     try {
-      const response = await postBooks("/cart", book);
-
-      const added = response?.data;
-      if (!added || !added.id) {
-        return;
-      }
-
-      // Add to local state
-      setCart((previousList) => {
-        return [
-          ...previousList,
-          {
-            key: key,
-            id: added.id,
-          },
-        ];
-      });
+      await postBooks("/cart", book);
     } catch (error) {
-      console.error("Error adding book to cart:", error);
+      console.log(error);
     }
   };
 
   // Remove book from cart
   const removeFromCart = async (book) => {
     try {
-      const key = normalizeKey(book.key);
-
-      const item = cart.find((entry) => {
-        return entry.key === key;
-      });
-
-      if (!item) {
-        return;
-      }
-
-      await deleteBooks(`/cart/${item.id}`);
-
-      setCart((previousList) => {
-        const updatedList = previousList.filter((entry) => {
-          return entry.key !== key;
-        });
-        return updatedList;
-      });
+      await deleteBooks(`/cart/${book.cartId}`);
     } catch (error) {
       console.error("Error removing book from cart:", error);
     }

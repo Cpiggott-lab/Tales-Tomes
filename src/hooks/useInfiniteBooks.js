@@ -3,13 +3,12 @@
 import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { useBooksService } from "../services/useBooksService";
+import { normalizeKey } from "../components/NormalizedKey";
 
 export function useInfiniteBooks({ subject = "fiction", pause = false }) {
   const [books, setBooks] = useState([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
-
-  const { getBooks } = useBooksService();
 
   // fetch books from OpenLibrary API by subject & page
   const fetchBooks = async () => {
@@ -17,9 +16,28 @@ export function useInfiniteBooks({ subject = "fiction", pause = false }) {
     setLoading(true); // mark loading before API call starts
     try {
       const response = await axios.get(
-        `https://openlibrary.org/search.json?q=subject:${subject}&page=${page}`
+        `https://openlibrary.org/search.json?q=subject:${subject}&page=${page}&limit=1`
       );
-      setBooks((prevBooks) => [...prevBooks, ...response.data.docs]); // append books to current list
+      const cartItems = await axios.get(
+        "https://tales-tomes-production.up.railway.app/cart"
+      );
+      const newData = response.data.docs.map((doc) => {
+        doc.key = normalizeKey(doc.key);
+        for (const item of cartItems.data) {
+          if (item.key === doc.key) {
+            return {
+              ...doc,
+              isInCart: true,
+              cartId: item.id,
+            };
+          }
+        }
+        return {
+          ...doc,
+          isInCart: false,
+        };
+      });
+      setBooks((prevBooks) => [...newData]); // append books to current list
     } catch (error) {
       console.error("Error fetching books:", error);
     } finally {
@@ -33,16 +51,16 @@ export function useInfiniteBooks({ subject = "fiction", pause = false }) {
   }, [page]);
 
   // fetch static data from our backend
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        await getBooks("/library");
-      } catch (error) {
-        console.error("Error fetching books from library:", error);
-      }
-    };
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       await getBooks("/library");
+  //     } catch (error) {
+  //       console.error("Error fetching books from library:", error);
+  //     }
+  //   };
+  //   fetchData();
+  // }, []);
 
   // infinite scroll logic: detect when near bottom of page
   const handleScroll = () => {
@@ -81,5 +99,6 @@ export function useInfiniteBooks({ subject = "fiction", pause = false }) {
     setLoading,
     page,
     setPage,
+    fetchBooks,
   };
 }

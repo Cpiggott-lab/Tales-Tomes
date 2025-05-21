@@ -4,11 +4,12 @@ import BookList from "../../components/BookList";
 import { useBookActions } from "../../hooks/useBookActions";
 import { useInfiniteBooks } from "../../hooks/useInfiniteBooks";
 import { useState } from "react";
+import { useBooksService } from "../../services/useBooksService";
 
 function LibraryCatalog() {
   // Track whether we're in search mode — stops infinite scroll when true
   const [searching, setSearching] = useState(false);
-
+  const [updateSate, setUpdateState] = useState(false);
   // Get wishlist/cart state and handlers
   const {
     wishlist,
@@ -20,10 +21,20 @@ function LibraryCatalog() {
   } = useBookActions();
 
   // Load books with infinite scroll — paused if searching
-  const { books, setBooks, loading, error } = useInfiniteBooks({
+  const { books, setBooks, fetchBooks, loading, error } = useInfiniteBooks({
     subject: "fiction",
     pause: searching,
   });
+
+  const handleAdd = (book) => {
+    addToCart(book);
+    fetchBooks();
+  };
+
+  const handleRemove = (book) => {
+    removeFromCart(book);
+    fetchBooks();
+  };
 
   // Show error if the fetch failed
   if (error) return <p>Error: {error}</p>;
@@ -56,10 +67,11 @@ function LibraryCatalog() {
         cart={cart}
         addToWishlist={addToWishlist}
         removeFromWishlist={removeFromWishlist}
-        addToCart={addToCart}
-        removeFromCart={removeFromCart}
+        addToCart={handleAdd}
+        removeFromCart={handleRemove}
         showDetails={true}
         loading={loading}
+        showRemoveFromCart={removeFromCart}
       />
     </div>
   );

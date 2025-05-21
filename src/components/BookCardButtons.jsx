@@ -35,43 +35,21 @@ function BookCardButtons(props) {
       }
     }
   }
-
   // Render action buttons
+  console.log("BUTTON", book);
   return (
     <div className="button-group">
+      <button
+        className="cart-button"
+        onClick={() => (book.isInCart ? removeFromCart(book) : addToCart(book))}
+      >
+        {book.isInCart ? "remove from cart" : "add to cart"}
+      </button>
       {/* Show if book not in wishlist */}
-      {addToWishlist && isInWishlist === false && (
-        <button className="cart-button" onClick={() => addToWishlist(book)}>
-          Add to Wishlist
-        </button>
-      )}
-
-      {/* Show if book is already in wishlist */}
-      {removeFromWishlist && isInWishlist === true && (
-        <button
-          className="cart-button"
-          onClick={() => removeFromWishlist(book)}
-        >
-          Remove from Wishlist
-        </button>
-      )}
-
-      {/* Show if book not in cart */}
-      {addToCart && isInCart === false && (
-        <button className="cart-button" onClick={() => addToCart(book)}>
-          Add to Cart
-        </button>
-      )}
-
-      {/* Always show if removeFromCart is passed */}
-      {removeFromCart && (
-        <button className="cart-button" onClick={() => removeFromCart(book.id)}>
-          Remove from Cart
-        </button>
-      )}
     </div>
   );
 }
 
 // Optimization: only rerenders if props actually change
-export default React.memo(BookCardButtons);
+export default BookCardButtons;
+// export default React.memo(BookCardButtons);
