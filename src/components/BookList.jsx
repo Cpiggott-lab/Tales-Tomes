@@ -78,7 +78,7 @@ function BookList({
                   hideButtons ? undefined : removeFromWishlist
                 }
                 addToCart={hideButtons ? undefined : addToCart}
-                removeFromCart={showRemoveFromCart ? removeFromCart : undefined}
+                removeFromCart={removeFromCart}
               />
             </div>
           )}

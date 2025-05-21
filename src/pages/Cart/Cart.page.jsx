@@ -47,10 +47,10 @@ function CartPage() {
   };
 
   // Remove one item
-  const removeItem = async (bookId) => {
+  const removeItem = async (book) => {
     try {
-      await deleteBooks(`/cart/${bookId}`);
-      setCartItems((prev) => prev.filter((b) => b.id !== bookId));
+      await deleteBooks(`/cart/${book.id}`);
+      setCartItems((prev) => prev.filter((b) => b.id !== book.id));
     } catch (error) {
       console.error("Error removing item:", error);
     }
