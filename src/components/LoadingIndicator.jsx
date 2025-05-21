@@ -1,5 +1,11 @@
-// Reusable loading message component with optional custom text
-function LoadingIndicator({ message = "Loading..." }) {
+// Reusable loading message component
+function LoadingIndicator(props) {
+  let message = "Loading...";
+
+  if (props.message) {
+    message = props.message;
+  }
+
   return <p className="loading-text">{message}</p>;
 }
 

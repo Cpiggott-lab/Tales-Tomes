@@ -27,6 +27,7 @@ function HomePage() {
     getBooks("/wishlist");
   }, []);
 
+  //from carousel library.
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },
@@ -73,17 +74,9 @@ function HomePage() {
             {data.map((book) => (
               <BookCardInfo book={book} />
             ))}
-            {/* <BookList books={data} showDetails={true} /> */}
           </Carousel>
         )}
       </div>
-      {/* <section className="logo-search-section">
-        <img
-          src="../../public/ChatGPT Image May 14, 2025, 10_40_02 PM.png"
-          alt="Tales & Tomes Logo"
-          className="logo-image"
-        />
-      </section> */}
       <div className="lower-main-page">
         <h1 className="homepage-title">Welcome Travelers of Epic Tomes!</h1>
         <p className="homepage-subtitle">

@@ -1,38 +1,53 @@
+import React, { useState } from "react";
+
 // Renders buttons to add/remove a book from wishlist or cart
-import React from "react";
-function BookCardButtons({
-  book,
-  wishlist,
-  cart,
-  addToWishlist,
-  removeFromWishlist,
-  addToCart,
-  removeFromCart,
-}) {
-  let isInWishlist = false;
-  let isInCart = false;
+function BookCardButtons(props) {
+  const {
+    book,
+    wishlist,
+    cart,
+    addToWishlist,
+    removeFromWishlist,
+    addToCart,
+    removeFromCart,
+  } = props;
 
-  // Check if book is in wishlist
-  if (wishlist && Array.isArray(wishlist)) {
-    isInWishlist = wishlist.some((b) => b.key === book.key);
-  }
+  const bookKey = book?.key;
 
-  // Check if book is in cart
-  if (cart && Array.isArray(cart)) {
-    isInCart = cart.some((b) => b.key === book.key);
-  }
+  // fix for instant render onclick.
+  const [wasJustAddedToCart, setWasJustAddedToCart] = useState(false);
+  const [wasJustAddedToWishlist, setWasJustAddedToWishlist] = useState(false);
+
+  // Check against state and local flags
+  const isInCart =
+    wasJustAddedToCart || (cart && cart.some((item) => item.key === bookKey));
+
+  const isInWishlist =
+    wasJustAddedToWishlist ||
+    (wishlist && wishlist.some((item) => item.key === bookKey));
+
+  // Trigger cart and local UI switch
+  const handleAddToCart = async () => {
+    await addToCart(book);
+    setWasJustAddedToCart(true);
+  };
+
+  // Trigger wishlist add local UI switch
+  const handleAddToWishlist = async () => {
+    await addToWishlist(book);
+    setWasJustAddedToWishlist(true);
+  };
 
   return (
     <div className="button-group">
-      {/* Show if book not in wishlist */}
-      {addToWishlist && !isInWishlist && (
-        <button className="cart-button" onClick={() => addToWishlist(book)}>
+      {/* Wishlist Buttons */}
+      {!isInWishlist && addToWishlist && (
+        <button className="cart-button" onClick={handleAddToWishlist}>
           Add to Wishlist
         </button>
       )}
 
-      {/* Show if book already in wishlist */}
-      {removeFromWishlist && isInWishlist && (
+      {isInWishlist && removeFromWishlist && (
         <button
           className="cart-button"
           onClick={() => removeFromWishlist(book)}
@@ -41,16 +56,15 @@ function BookCardButtons({
         </button>
       )}
 
-      {/* Show if book not in cart */}
-      {addToCart && !isInCart && (
-        <button className="cart-button" onClick={() => addToCart(book)}>
+      {/* Cart Buttons */}
+      {!isInCart && addToCart && (
+        <button className="cart-button" onClick={handleAddToCart}>
           Add to Cart
         </button>
       )}
 
-      {/* Always show if removeFromCart is passed */}
-      {removeFromCart && (
-        <button className="cart-button" onClick={() => removeFromCart(book.id)}>
+      {isInCart && removeFromCart && (
+        <button className="cart-button" onClick={() => removeFromCart(book)}>
           Remove from Cart
         </button>
       )}
@@ -58,5 +72,4 @@ function BookCardButtons({
   );
 }
 
-// only renders again if the props change. Attempt at optimization.
-export default React.memo(BookCardButtons);
+export default BookCardButtons;

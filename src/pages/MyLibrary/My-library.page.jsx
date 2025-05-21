@@ -11,7 +11,7 @@ function BookCard({ book, from }) {
     data: { book, from },
   });
 
-  // Apply drag transform
+  // Apply drag transform from d&d library
   let style;
   if (transform) {
     style = {
@@ -106,20 +106,61 @@ export default function MyLibraryPage() {
 
     try {
       // Update backend
-      await postBooks(`/${to}`, book);
-      await deleteBooks(`/${from}/${book.id}`);
+      const addEndpoint = `/${to}`;
+      const removeEndpoint = `/${from}/${book.id}`;
+
+      await postBooks(addEndpoint, book);
+      await deleteBooks(removeEndpoint);
 
       // Remove from old list
-      const removeFrom = (list, id) => list.filter((b) => b.id !== id);
-      if (from === "owned") setOwned((prev) => removeFrom(prev, book.id));
-      if (from === "reading") setReading((prev) => removeFrom(prev, book.id));
-      if (from === "finished") setFinished((prev) => removeFrom(prev, book.id));
+      const removeFrom = (list, id) => {
+        const updatedList = list.filter((b) => {
+          return b.id !== id;
+        });
+        return updatedList;
+      };
+
+      if (from === "owned") {
+        setOwned((previousList) => {
+          return removeFrom(previousList, book.id);
+        });
+      }
+
+      if (from === "reading") {
+        setReading((previousList) => {
+          return removeFrom(previousList, book.id);
+        });
+      }
+
+      if (from === "finished") {
+        setFinished((previousList) => {
+          return removeFrom(previousList, book.id);
+        });
+      }
 
       // Add to new list
-      const addTo = (list, book) => [...list, book];
-      if (to === "owned") setOwned((prev) => addTo(prev, book));
-      if (to === "reading") setReading((prev) => addTo(prev, book));
-      if (to === "finished") setFinished((prev) => addTo(prev, book));
+      const addTo = (list, book) => {
+        const updatedList = [...list, book];
+        return updatedList;
+      };
+
+      if (to === "owned") {
+        setOwned((previousList) => {
+          return addTo(previousList, book);
+        });
+      }
+
+      if (to === "reading") {
+        setReading((previousList) => {
+          return addTo(previousList, book);
+        });
+      }
+
+      if (to === "finished") {
+        setFinished((previousList) => {
+          return addTo(previousList, book);
+        });
+      }
     } catch (err) {
       console.error("Failed to move book:", err);
     }

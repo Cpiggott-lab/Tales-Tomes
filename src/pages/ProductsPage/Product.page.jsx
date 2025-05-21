@@ -22,8 +22,23 @@ export default function ProductPage() {
   if (!book) return <p>Book not found.</p>;
 
   // Check if book is already in cart or wishlist
-  const isInCart = cart.some((b) => b.key === book.key);
-  const isInWishlist = wishlist.some((b) => b.key === book.key);
+  let isInCart = false;
+  for (let i = 0; i < cart.length; i++) {
+    const currentBook = cart[i];
+    if (currentBook.key === book.key) {
+      isInCart = true;
+      break;
+    }
+  }
+
+  let isInWishlist = false;
+  for (let i = 0; i < wishlist.length; i++) {
+    const currentBook = wishlist[i];
+    if (currentBook.key === book.key) {
+      isInWishlist = true;
+      break;
+    }
+  }
 
   // Get book cover image
   const coverId = book.cover_i || book.covers?.[0];
