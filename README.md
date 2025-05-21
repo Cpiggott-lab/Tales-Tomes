@@ -4,7 +4,7 @@
 
 ---
 
-## 🚀 Features
+### 🚀 Features
 
 ### 🔍 Home Page
 
