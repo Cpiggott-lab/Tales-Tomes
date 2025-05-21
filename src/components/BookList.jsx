@@ -30,7 +30,9 @@ function BookList({
       {/* Show skeletons if loading and no books loaded yet */}
       {loading && books.length === 0
         ? Array.from({ length: 20 }).map((_, i) => <SkeletonBookCard key={i} />)
-        : books.map((book, index) => {
+        : books &&
+          books.length > 0 &&
+          books.map((book, index) => {
             const normalizedKey = normalizeKey(book.key);
             const truncatedTitle = truncateText(book.title);
             const truncatedAuthor = truncateAuthor(book.author_name);
