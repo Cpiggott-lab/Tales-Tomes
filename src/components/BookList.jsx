@@ -21,7 +21,7 @@ function BookList({
   const shouldShowSkeletons = loading && books.length === 0;
 
   if (shouldShowSkeletons) {
-    const skeletons = Array.from({ length: 20 }).map((_, i) => {
+    const skeletons = Array.from({ length: 20 }).map((h, i) => {
       return <SkeletonBookCard key={i} />;
     });
 
