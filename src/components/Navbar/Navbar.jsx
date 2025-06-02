@@ -13,11 +13,7 @@ const navLikns = [
 function Navbar() {
   return (
     <header className="navbar">
-      {/* {navLikns.map((link) => (
-        <Link to={link.path} key={link.name} className="nav-link">
-          {link.name}
-        </Link>
-      ))} */}
+      {}
       <nav className="nav-links">
         <Link to="/" className="home-link-container">
           <img src={talesLogo} alt="logo" className="tales-tomes-logo-navbar" />

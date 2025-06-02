@@ -90,3 +90,42 @@
   text-align: center;
   margin-top: 3rem;
 }
+.dark-mode .wishlist-catalog {
+  background: linear-gradient(to bottom, #1a1a1a, #121212);
+  color: #e0e0e0;
+}
+
+.dark-mode .wishlist-title {
+  color: #ffffff;
+}
+
+.dark-mode .wishlist-subtitle {
+  color: #bbbbbb;
+}
+
+.dark-mode .wishlist-item {
+  background-color: #1e1e1e;
+  border: 1px solid #333;
+}
+
+.dark-mode .wishlist-book-title {
+  color: #f0f0f0;
+}
+
+.dark-mode .wishlist-book-author {
+  color: #aaaaaa;
+}
+
+.dark-mode .wishlist-button {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.dark-mode .wishlist-button:hover {
+  background-color: #2563eb;
+}
+
+.dark-mode .loading-list,
+.dark-mode .wishlist-empty {
+  color: #cccccc;
+}

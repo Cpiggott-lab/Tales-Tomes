@@ -1,17 +1,16 @@
-// https://dndkit.com/
+
 import { DndContext, useDraggable, useDroppable } from "@dnd-kit/core";
 import { useEffect, useState } from "react";
 import "./My-library.style.css";
 import { useBooksService } from "../../services/useBooksService";
 
-// Draggable card for each book
 function BookCard({ book, from }) {
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id: book.id,
     data: { book, from },
   });
 
-  // Apply drag transform from d&d library
+ 
   let style;
   if (transform) {
     style = {
@@ -19,7 +18,7 @@ function BookCard({ book, from }) {
     };
   }
 
-  // Build cover image
+ 
   let imageUrl = "";
   if (book.cover_i) {
     imageUrl = `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`;
@@ -46,7 +45,6 @@ function BookCard({ book, from }) {
   );
 }
 
-// Droppable column container
 function LibraryColumn({ id, title, books, className }) {
   const { setNodeRef } = useDroppable({ id });
 
@@ -62,21 +60,20 @@ function LibraryColumn({ id, title, books, className }) {
   );
 }
 
-// Main library page with drag-and-drop columns
 export default function MyLibraryPage() {
   const { getBooks, postBooks, deleteBooks } = useBooksService();
 
-  // State for each column
+ 
   const [owned, setOwned] = useState([]);
   const [reading, setReading] = useState([]);
   const [finished, setFinished] = useState([]);
 
-  // Load all book lists on page load
+ 
   useEffect(() => {
     const load = async () => {
-      // Reusable fetch for each list
+     
       const loadList = async (path, setter) => {
-        await getBooks(path); // optional: doesn't update local state
+        await getBooks(path);
         const res = await fetch(
           `https://tales-tomes-production.up.railway.app${path}`
         );
@@ -92,7 +89,7 @@ export default function MyLibraryPage() {
     load();
   }, []);
 
-  // When drag ends
+ 
   const handleDragEnd = async (event) => {
     const { active, over } = event;
     if (!over) return;
@@ -105,14 +102,14 @@ export default function MyLibraryPage() {
     const to = over.id;
 
     try {
-      // Update backend
+     
       const addEndpoint = `/${to}`;
       const removeEndpoint = `/${from}/${book.id}`;
 
       await postBooks(addEndpoint, book);
       await deleteBooks(removeEndpoint);
 
-      // Remove from old list
+     
       const removeFrom = (list, id) => {
         const updatedList = list.filter((b) => {
           return b.id !== id;
@@ -138,7 +135,7 @@ export default function MyLibraryPage() {
         });
       }
 
-      // Add to new list
+     
       const addTo = (list, book) => {
         const updatedList = [...list, book];
         return updatedList;
@@ -173,7 +170,7 @@ export default function MyLibraryPage() {
         A book is a gift you can open again and again. -Garrison Keillor
       </p>
 
-      {/* DnD kit context wrapper */}
+      {}
       <DndContext onDragEnd={handleDragEnd}>
         <div className="library-catalog-container">
           <LibraryColumn

@@ -6,9 +6,9 @@ import { useBooksService } from "../../services/useBooksService";
 function WishlistPage() {
   const [wishlistBooks, setWishlistBooks] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { deleteBooks, postBooks } = useBooksService(); //bringing iin Services
+  const { deleteBooks, postBooks } = useBooksService();
 
-  // Load wishlist from backend
+ 
   const fetchWishlist = async () => {
     try {
       const res = await fetch(
@@ -23,12 +23,12 @@ function WishlistPage() {
     }
   };
 
-  // Run once on mount
+ 
   useEffect(() => {
     fetchWishlist();
   }, []);
 
-  // Remove book from wishlist
+ 
   const handleRemoveFromWishlist = async (book) => {
     try {
       await deleteBooks(`/wishlist/${book.id}`);
@@ -45,7 +45,7 @@ function WishlistPage() {
     }
   };
 
-  // Move book to cart and remove from wishlist
+ 
   const handleAddToCart = async (book) => {
     try {
       await postBooks("/cart", book);
@@ -80,15 +80,15 @@ function WishlistPage() {
         </p>
       </div>
 
-      {/* Reuse BookList with wishlist props */}
+      {}
       <BookList
         books={wishlistBooks}
         wishlist={wishlistBooks}
         cart={[]}
-        addToWishlist={() => {}} // disable add button
+        addToWishlist={() => {}}
         removeFromWishlist={handleRemoveFromWishlist}
         addToCart={handleAddToCart}
-        removeFromCart={() => {}} // disable remove from cart
+        removeFromCart={() => {}}
         showDetails={true}
       />
     </div>

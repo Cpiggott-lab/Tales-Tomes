@@ -2,16 +2,15 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useBooksService } from "../services/useBooksService";
 
-// Custom hook to handle wishlist/cart logic
 export function useBookActions() {
-  // Local state for wishlist and cart
+ 
   const [wishlist, setWishlist] = useState([]);
   const [cart, setCart] = useState([]);
 
-  // Pull API functions from service
+ 
   const { postBooks, deleteBooks } = useBooksService();
 
-  // Strips unwanted path from book key
+ 
   const normalizeKey = (key) => {
     if (typeof key === "string") {
       return key.replace("/works/", "");
@@ -19,7 +18,7 @@ export function useBookActions() {
     return "";
   };
 
-  // Add book to wishlist if not already there
+ 
   const addToWishlist = async (book) => {
     const key = normalizeKey(book.key);
 
@@ -39,7 +38,7 @@ export function useBookActions() {
         return;
       }
 
-      // Add to local state
+     
       setWishlist((previousList) => {
         return [
           ...previousList,
@@ -54,7 +53,7 @@ export function useBookActions() {
     }
   };
 
-  // Remove book from wishlist
+ 
   const removeFromWishlist = async (book) => {
     try {
       const key = normalizeKey(book.key);
@@ -80,7 +79,7 @@ export function useBookActions() {
     }
   };
 
-  // Add book to cart if not already there
+ 
   const addToCart = async (book) => {
     const key = normalizeKey(book.key);
 
@@ -100,7 +99,7 @@ export function useBookActions() {
         return;
       }
 
-      // Add to local state
+     
       setCart((previousList) => {
         return [
           ...previousList,
@@ -115,7 +114,7 @@ export function useBookActions() {
     }
   };
 
-  // Remove book from cart
+ 
   const removeFromCart = async (book) => {
     try {
       const key = normalizeKey(book.key);
@@ -141,7 +140,7 @@ export function useBookActions() {
     }
   };
 
-  // On load, fetch wishlist and cart from backend
+ 
   useEffect(() => {
     const fetchLists = async () => {
       try {
@@ -186,7 +185,7 @@ export function useBookActions() {
     fetchLists();
   }, []);
 
-  // Show all actions and data to components
+ 
   return {
     wishlist,
     cart,

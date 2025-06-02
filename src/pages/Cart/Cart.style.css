@@ -165,3 +165,76 @@
   margin-top: 2rem;
   color: #666;
 }
+.dark-mode .cart-page-container {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+.dark-mode .cart-title {
+  background-color: #1e1e1e;
+  color: white;
+}
+
+.dark-mode .cart-page {
+  background-color: #181818;
+}
+
+.dark-mode .cart-items-container,
+.dark-mode .checkout-container {
+  background-color: #1e1e1e;
+  border-color: #333;
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.03);
+}
+
+.dark-mode .cart-item {
+  background-color: #242424;
+  border-color: #333;
+}
+
+.dark-mode .cart-item-info {
+  color: #ddd;
+}
+
+.dark-mode .cart-button,
+.dark-mode .cart-button-clear {
+  background-color: #333;
+  color: white;
+}
+
+.dark-mode .cart-button:hover,
+.dark-mode .cart-button-clear:hover {
+  background-color: #555;
+}
+
+.dark-mode .checkout-form-details input,
+.dark-mode .payment-form-details input {
+  background-color: #2a2a2a;
+  color: #f1f1f1;
+  border-color: #444;
+}
+
+.dark-mode .checkout-form-details label,
+.dark-mode .payment-form-details label {
+  color: #bbb;
+}
+
+.dark-mode .payment-method {
+  background-color: #1a1a1a;
+  border-color: #555;
+  color: #ddd;
+}
+
+.dark-mode .payment-method.selected {
+  background-color: #333;
+  border-color: #777;
+}
+
+.dark-mode .payment-success-message {
+  background-color: #003d2e;
+  border-color: #00916e;
+  color: #60d3b9;
+}
+
+.dark-mode .empty-cart {
+  color: #888;
+}

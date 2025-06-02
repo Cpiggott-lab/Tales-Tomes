@@ -1,4 +1,4 @@
-//Shorten the returned value to a maximum of set characters. Just helps with displaying random long titles.
+
 export function truncateText(text, maxLength = 30) {
   if (!text || typeof text !== "string") {
     return "";
