@@ -3,15 +3,17 @@ import "./Homepage.style.css";
 import { useBookActions } from "../../hooks/useBookActions";
 import BookList from "../../components/BookList";
 import Carousel from "react-multi-carousel";
-import { useBooksService } from "../../services/useBooksService";
 import "react-multi-carousel/lib/styles.css";
 import BookCardInfo from "../../components/BookCardInfo";
+import SkeletonBookCard from "../../components/SkeletonCard";
 import { Link } from "react-router-dom";
 import Search from "../../components/Search";
-// import BookCardInfo from "../../components/BookCardInfo";
 
 function HomePage() {
-  const [books, setBooks] = useState([]);
+  const [carouselBooks, setCarouselBooks] = useState([]);
+  const [searchResults, setSearchResults] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   const {
     wishlist,
     cart,
@@ -21,13 +23,31 @@ function HomePage() {
     removeFromCart,
   } = useBookActions();
 
-  const { data, error, loading, getBooks } = useBooksService();
-
+ 
   useEffect(() => {
-    getBooks("/wishlist");
+    async function fetchExternalBooks() {
+      try {
+        setLoading(true);
+        const response = await fetch(
+          "https://openlibrary.org/subjects/fantasy.json?limit=50"
+        );
+        const json = await response.json();
+        const allBooks = json.works;
+
+        const shuffled = allBooks.sort(() => 0.5 - Math.random());
+        const randomBooks = shuffled.slice(0, 20);
+
+        setCarouselBooks(randomBooks);
+      } catch (error) {
+        console.error("Failed to fetch books:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchExternalBooks();
   }, []);
 
-  //from carousel library.
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },
@@ -47,36 +67,37 @@ function HomePage() {
     },
   };
 
-  console.log("dataaaaa", data);
-
   return (
     <div className="homepage">
       <div>
-        {data && data.length > 0 && (
-          <Carousel
-            swipeable={true}
-            draggable={false}
-            showDots={true}
-            responsive={responsive}
-            ssr={true} // means to render carousel on server-side.
-            infinite={true}
-            autoPlay={true}
-            autoPlaySpeed={1000}
-            keyBoardControl={true}
-            customTransition="transform 300ms ease-in-out"
-            transitionDuration={1500}
-            containerClass="carousel-container"
-            removeArrowOnDeviceType={["tablet", "mobile"]}
-            dotListClass="custom-dot-list-style"
-            itemClass="carousel-item-padding-40-px"
-            rewindWithAnimation={true}
-          >
-            {data.map((book) => (
-              <BookCardInfo book={book} />
-            ))}
-          </Carousel>
-        )}
+        <Carousel
+          swipeable={true}
+          draggable={false}
+          showDots={true}
+          responsive={responsive}
+          ssr={true}
+          infinite={true}
+          autoPlay={!loading}
+          autoPlaySpeed={1000}
+          keyBoardControl={true}
+          customTransition="transform 300ms ease-in-out"
+          transitionDuration={1500}
+          containerClass="carousel-container"
+          removeArrowOnDeviceType={["tablet", "mobile"]}
+          dotListClass="custom-dot-list-style"
+          itemClass="carousel-item-padding-40-px"
+          rewindWithAnimation={true}
+        >
+          {loading
+            ? Array.from({ length: 10 }).map((_, i) => (
+                <SkeletonBookCard key={`skeleton-${i}`} />
+              ))
+            : carouselBooks.map((book) => (
+                <BookCardInfo key={book.key} book={book} />
+              ))}
+        </Carousel>
       </div>
+
       <div className="lower-main-page">
         <h1 className="homepage-title">Welcome Travelers of Epic Tomes!</h1>
         <p className="homepage-subtitle">
@@ -86,13 +107,15 @@ function HomePage() {
         <Link to="/library-catalog" className="homepage-button">
           Browse Library
         </Link>
+
         <div className="search-bar-wrapper">
-          <Search setBooks={setBooks} />
+          <Search setBooks={setSearchResults} />
         </div>
-        {books.length > 0 && (
+
+        {searchResults.length > 0 && (
           <div className="search-results">
             <BookList
-              books={books}
+              books={searchResults}
               wishlist={wishlist}
               cart={cart}
               addToWishlist={addToWishlist}

@@ -90,3 +90,38 @@
 .my-library-sub-header {
   margin-bottom: 2rem;
 }
+.dark-mode .library-catalog {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+.dark-mode .my-library-title {
+  color: #ffffff;
+}
+
+.dark-mode .owned-container,
+.dark-mode .reading-container,
+.dark-mode .finished-container {
+  background-color: #1e1e1e;
+  border-color: #444;
+}
+
+.dark-mode .owned-title,
+.dark-mode .reading-title,
+.dark-mode .finished-title {
+  color: #dddddd;
+}
+
+.dark-mode .book-card {
+  background-color: #222;
+  border-color: #444;
+  color: #f1f1f1;
+}
+
+.dark-mode .book-card-author {
+  color: #aaaaaa;
+}
+
+.dark-mode .my-library-sub-header {
+  color: #ccc;
+}

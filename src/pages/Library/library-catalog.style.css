@@ -131,3 +131,45 @@
 .book-item:hover {
   transform: scale(1.08);
 }
+.dark-mode .library-catalog {
+  background-color: #121212;
+  color: #f0f0f0;
+}
+
+.dark-mode .library-catalog-title {
+  color: #ffffff;
+}
+
+.dark-mode .library-catalog-subtitle {
+  color: #bbbbbb;
+}
+
+.dark-mode .book-list {
+  background-color: #1e1e1e;
+}
+
+.dark-mode .book-item {
+  background-color: #222;
+  border-color: #444;
+}
+
+.dark-mode .book-title {
+  color: #f0f0f0;
+}
+
+.dark-mode .book-author {
+  color: #aaaaaa;
+}
+
+.dark-mode .book-card-button {
+  background-color: #3b82f6;
+  color: #ffffff;
+}
+
+.dark-mode .book-card-button:hover {
+  background-color: #2563eb;
+}
+
+.dark-mode .Loading-message-catalog {
+  color: #dddddd;
+}

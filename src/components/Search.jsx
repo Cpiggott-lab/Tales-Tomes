@@ -1,29 +1,28 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-// Search bar that fetches books from Open Library as you type
 function Search({ setBooks }) {
-  const [search, setSearch] = useState(""); // input state
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
-      // don’t search if empty or too short
+     
       if (!search || search.length < 2) return;
 
       try {
         const response = await axios.get(
           "https://openlibrary.org/search.json?q=" + encodeURIComponent(search)
         );
-        setBooks(response.data.docs); // send results up to parent
+        setBooks(response.data.docs);
       } catch (error) {
         console.error("Error fetching books:", error);
       }
     };
 
     fetchData();
-  }, [search]); // run when search text changes
+  }, [search]);
 
-  // update input state
+ 
   const handleSearch = (event) => {
     setSearch(event.target.value);
   };

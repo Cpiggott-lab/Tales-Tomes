@@ -1,4 +1,4 @@
-// Reusable loading message component
+
 function LoadingIndicator(props) {
   let message = "Loading...";
 

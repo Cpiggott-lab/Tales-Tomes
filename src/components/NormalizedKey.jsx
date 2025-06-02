@@ -1,5 +1,4 @@
-// Cleans up a book key by removing "/works/" and trimming whitespace.
-// If the key is not a string, it returns an empty string.
+
 export function normalizeKey(key) {
   const isString = typeof key === "string";
 

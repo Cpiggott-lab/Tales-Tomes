@@ -3,12 +3,12 @@ import { useBookActions } from "../../hooks/useBookActions";
 import "./Product.style.css";
 
 export default function ProductPage() {
-  // Get book ID from URL and book data from route state
+ 
   const { bookId } = useParams();
   const { state } = useLocation();
   const book = state?.book;
 
-  // Use custom hook to get wishlist/cart + related actions
+ 
   const {
     wishlist,
     cart,
@@ -18,10 +18,10 @@ export default function ProductPage() {
     removeFromWishlist,
   } = useBookActions();
 
-  // If book wasn’t passed via route state, show fallback
+ 
   if (!book) return <p>Book not found.</p>;
 
-  // Check if book is already in cart or wishlist
+ 
   let isInCart = false;
   for (let i = 0; i < cart.length; i++) {
     const currentBook = cart[i];
@@ -40,7 +40,7 @@ export default function ProductPage() {
     }
   }
 
-  // Get book cover image
+ 
   const coverId = book.cover_i || book.covers?.[0];
   const coverUrl = coverId
     ? `https://covers.openlibrary.org/b/id/${coverId}-L.jpg`
@@ -51,7 +51,7 @@ export default function ProductPage() {
       <h1 className="product-page-title">Book Detail Page</h1>
 
       <div className="book-details-container">
-        {/* Cover Image */}
+        {}
         <div className="book-cover-container">
           <img
             src={coverUrl}
@@ -60,7 +60,7 @@ export default function ProductPage() {
           />
         </div>
 
-        {/* Book Info */}
+        {}
         <div className="product-book-info-container">
           <h1 className="product-page-book-title">Title: {book.title}</h1>
           <h3 className="product-page-book-id">Book ID: {bookId}</h3>
@@ -74,9 +74,9 @@ export default function ProductPage() {
               "No description available."}
           </p>
 
-          {/* Action Buttons */}
+          {}
           <div className="product-page-buttons-container">
-            {/* Cart Buttons */}
+            {}
             {isInCart ? (
               <button
                 className="product-page-button"
@@ -93,7 +93,7 @@ export default function ProductPage() {
               </button>
             )}
 
-            {/* Wishlist Buttons */}
+            {}
             {isInWishlist ? (
               <button
                 className="product-page-button"

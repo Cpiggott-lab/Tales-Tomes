@@ -6,10 +6,10 @@ import { useInfiniteBooks } from "../../hooks/useInfiniteBooks";
 import { useState } from "react";
 
 function LibraryCatalog() {
-  // Track whether we're in search mode — stops infinite scroll when true
+ 
   const [searching, setSearching] = useState(false);
 
-  // Get wishlist/cart state and handlers
+ 
   const {
     wishlist,
     cart,
@@ -19,13 +19,13 @@ function LibraryCatalog() {
     removeFromCart,
   } = useBookActions();
 
-  // Load books with infinite scroll — paused if searching
+ 
   const { books, setBooks, loading, error } = useInfiniteBooks({
     subject: "fiction",
     pause: searching,
   });
 
-  // Show error if the fetch failed
+ 
   if (error) return <p>Error: {error}</p>;
 
   return (
@@ -38,18 +38,18 @@ function LibraryCatalog() {
           occasion. Be inspired and find your new favorite book now!
         </p>
 
-        {/* Search bar replaces books and pauses scroll */}
+        {}
         <div className="search-bar-wrapper">
           <Search
             setBooks={(books) => {
-              setSearching(true); // once search runs, pause infinite scroll
-              setBooks(books); // overwrite book list with search results
+              setSearching(true);
+              setBooks(books);
             }}
           />
         </div>
       </div>
 
-      {/* Show books using reusable BookList */}
+      {}
       <BookList
         books={books}
         wishlist={wishlist}

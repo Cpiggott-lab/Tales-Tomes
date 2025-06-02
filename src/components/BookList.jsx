@@ -17,7 +17,7 @@ function BookList({
   showRemoveFromCart = false,
   loading = false,
 }) {
-  // Show skeleton cards if loading and no books loaded yet
+ 
   const shouldShowSkeletons = loading && books.length === 0;
 
   if (shouldShowSkeletons) {
@@ -28,21 +28,22 @@ function BookList({
     return <div className="book-list">{skeletons}</div>;
   }
 
-  // Show actual book cards if books are available
+ 
   const bookCards = books.map((book, index) => {
     const normalizedKey = normalizeKey(book.key);
     const truncatedTitle = truncateText(book.title);
     const truncatedAuthor = truncateAuthor(book.author_name);
 
-    const hasCover = !!book.cover_i;
+    const coverId = book.cover_i || book.cover_id;
+    const hasCover = !!coverId;
     const imageUrl = hasCover
-      ? `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`
-      : "";
+      ? `https://covers.openlibrary.org/b/id/${coverId}-M.jpg`
+      : "https://via.placeholder.com/150x220?text=No+Cover";
 
     return (
       <div key={`${normalizedKey}-${index}`} className="book-item">
         <div className="book-info-block">
-          {/* Book image + link */}
+          {}
           {showDetails && imageUrl && (
             <div className="book-image-container">
               <Link
@@ -60,13 +61,13 @@ function BookList({
             </div>
           )}
 
-          {/* Book title + author */}
+          {}
           <div className="book-info">
             <h2 className="book-title">{truncatedTitle}</h2>
             <p className="book-author">by {truncatedAuthor}</p>
           </div>
 
-          {/* Action buttons (if enabled) */}
+          {}
           {(!hideButtons || showRemoveFromCart) && (
             <div className="book-actions">
               <BookCardButtons

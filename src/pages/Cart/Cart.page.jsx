@@ -8,7 +8,7 @@ function CartPage() {
   const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Fetch cart items from backend
+ 
   const fetchCart = async () => {
     try {
       await getBooks("/cart");
@@ -23,18 +23,18 @@ function CartPage() {
     }
   };
 
-  // Load cart when page mounts
+ 
   useEffect(() => {
     fetchCart();
   }, []);
 
-  // Calculate total price
+ 
   const totalPrice = cartItems.reduce(
     (acc, book) => acc + (book.price || 0),
     0
   );
 
-  // Delete every item from cart
+ 
   const clearCart = async () => {
     try {
       for (const book of cartItems) {
@@ -46,7 +46,7 @@ function CartPage() {
     }
   };
 
-  // Remove one item
+ 
   const removeItem = async (book) => {
     try {
       await deleteBooks(`/cart/${book.id}`);
@@ -56,7 +56,7 @@ function CartPage() {
     }
   };
 
-  // Move cart items to "owned" then clear them
+ 
   const handlePayClick = async (e) => {
     e.preventDefault();
     try {
@@ -70,10 +70,10 @@ function CartPage() {
     }
   };
 
-  // Loading state
+ 
   if (loading) return <p>Loading cart...</p>;
 
-  // Empty cart message
+ 
   if (cartItems.length === 0) {
     return (
       <div className="empty-cart">
@@ -91,7 +91,7 @@ function CartPage() {
           <button className="cart-button-clear" onClick={clearCart}>
             Clear Cart
           </button>
-          {/* Show book cards with remove button */}
+          {}
           <BookList
             books={cartItems}
             cart={cartItems}
@@ -108,7 +108,7 @@ function CartPage() {
             <h2>Total: €{totalPrice.toFixed(2)}</h2>
             <h2 className="items-in-cart">Items in Cart: {cartItems.length}</h2>
 
-            {/* Fake shipping form — no submission logic */}
+            {}
             <form
               className="checkout-form-details"
               onSubmit={(e) => e.preventDefault()}
@@ -137,7 +137,7 @@ function CartPage() {
           <div className="payment-form">
             <h1>Payment</h1>
 
-            {/* Payment options — no logic behind them */}
+            {}
             <div className="payment-method-buttons">
               <button type="button" className="payment-method selected">
                 Credit Card
@@ -150,7 +150,7 @@ function CartPage() {
               </button>
             </div>
 
-            {/* Fake payment form */}
+            {}
             <form className="payment-form-details" onSubmit={handlePayClick}>
               <label htmlFor="card-number">Card Number</label>
               <input type="text" id="card-number" name="card-number" />

@@ -81,3 +81,46 @@
   padding: 2rem;
   color: #777;
 }
+.dark-mode .product-page {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+.dark-mode .product-page-title {
+  color: #ffffff;
+}
+
+.dark-mode .book-details-container {
+  background-color: #1e1e1e;
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.05);
+}
+
+.dark-mode .product-page-book-cover {
+  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .product-page-book-title {
+  color: #f0f0f0;
+}
+
+.dark-mode .product-page-book-id,
+.dark-mode .product-page-book-author {
+  color: #bbbbbb;
+}
+
+.dark-mode .product-page-book-description {
+  color: #dddddd;
+}
+
+.dark-mode .product-page-button {
+  background-color: #333;
+  color: #ffffff;
+}
+
+.dark-mode .product-page-button:hover {
+  background-color: #555;
+}
+
+.dark-mode .loading-book-details {
+  color: #999999;
+}
